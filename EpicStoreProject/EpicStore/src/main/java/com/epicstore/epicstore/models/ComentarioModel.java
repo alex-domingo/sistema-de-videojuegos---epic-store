@@ -1,6 +1,7 @@
 package com.epicstore.epicstore.models;
 
 import com.epicstore.epicstore.dtos.ComentarioDTO;
+import com.epicstore.epicstore.dtos.CrearComentarioDTO;
 import com.epicstore.epicstore.util.DBConnection;
 
 import java.sql.Connection;
@@ -17,7 +18,7 @@ public class ComentarioModel {
         - Empresa: EMPRESA.comentarios_visibles_global
         - Juego: VIDEOJUEGO.comentarios_visibles
         - Comentario: COMENTARIO.visible
-        Si cualquiera está en 'N', el texto se oculta (pero se devuelve calificación). 
+        Si cualquiera está en 'N', el texto se oculta (pero devolvemos la calificación) 
          */
         String sql = "SELECT "
                 + " co.id_comentario, co.id_videojuego, co.id_usuario, co.id_comentario_padre, "
@@ -75,4 +76,65 @@ public class ComentarioModel {
 
         return lista;
     }
+
+    public boolean usuarioComproVideojuego(int idUsuario, int idVideojuego) {
+        String sql = "SELECT 1 FROM COMPRA WHERE id_usuario = ? AND id_videojuego = ? LIMIT 1";
+        DBConnection db = new DBConnection();
+
+        try (Connection conn = db.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, idUsuario);
+            ps.setInt(2, idVideojuego);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                return rs.next();
+            }
+
+        } catch (Exception e) {
+            System.err.println("Error al validar compra: " + e.getMessage());
+            return false;
+        }
+    }
+
+    public int insertarComentario(CrearComentarioDTO dto) {
+
+        String sql = "INSERT INTO COMENTARIO "
+                + "(id_usuario, id_videojuego, id_comentario_padre, fecha, texto, calificacion, visible) "
+                + "VALUES (?, ?, ?, NOW(), ?, ?, 'S')";
+
+        DBConnection db = new DBConnection();
+
+        try (Connection conn = db.getConnection(); PreparedStatement ps = conn.prepareStatement(sql, java.sql.Statement.RETURN_GENERATED_KEYS)) {
+
+            ps.setInt(1, dto.getIdUsuario());
+            ps.setInt(2, dto.getIdVideojuego());
+
+            if (dto.getIdComentarioPadre() == null) {
+                ps.setNull(3, java.sql.Types.INTEGER);
+            } else {
+                ps.setInt(3, dto.getIdComentarioPadre());
+            }
+
+            ps.setString(4, dto.getTexto());
+            ps.setInt(5, dto.getCalificacion());
+
+            int filas = ps.executeUpdate();
+            if (filas == 0) {
+                return -1;
+            }
+
+            try (ResultSet rs = ps.getGeneratedKeys()) {
+                if (rs.next()) {
+                    return rs.getInt(1);
+                }
+            }
+
+            return -1;
+
+        } catch (Exception e) {
+            System.err.println("Error al insertar comentario: " + e.getMessage());
+            return -1;
+        }
+    }
+
 }
