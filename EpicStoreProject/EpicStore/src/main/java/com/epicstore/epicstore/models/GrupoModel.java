@@ -1,11 +1,13 @@
 package com.epicstore.epicstore.models;
 
 import com.epicstore.epicstore.util.DBConnection;
+import com.epicstore.epicstore.dtos.GrupoResumenDTO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 public class GrupoModel {
 
@@ -90,5 +92,39 @@ public class GrupoModel {
                 }
             }
         }
+    }
+
+    public ArrayList<GrupoResumenDTO> listarGruposPorUsuario(int idUsuario) throws Exception {
+
+        String sql = "SELECT "
+                + " g.id_grupo, "
+                + " g.nombre_grupo, "
+                + " mg.rol, "
+                + " (SELECT COUNT(*) FROM MIEMBRO_GRUPO m2 WHERE m2.id_grupo = g.id_grupo) AS total_miembros "
+                + "FROM MIEMBRO_GRUPO mg "
+                + "JOIN GRUPO_FAMILIAR g ON mg.id_grupo = g.id_grupo "
+                + "WHERE mg.id_usuario = ? "
+                + "ORDER BY g.nombre_grupo ASC";
+
+        ArrayList<GrupoResumenDTO> lista = new ArrayList<>();
+        DBConnection db = new DBConnection();
+
+        try (Connection conn = db.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, idUsuario);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    GrupoResumenDTO dto = new GrupoResumenDTO();
+                    dto.setIdGrupo(rs.getInt("id_grupo"));
+                    dto.setNombreGrupo(rs.getString("nombre_grupo"));
+                    dto.setRol(rs.getString("rol"));
+                    dto.setTotalMiembros(rs.getInt("total_miembros"));
+                    lista.add(dto);
+                }
+            }
+        }
+
+        return lista;
     }
 }

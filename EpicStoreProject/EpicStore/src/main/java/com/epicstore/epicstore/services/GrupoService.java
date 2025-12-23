@@ -1,7 +1,10 @@
 package com.epicstore.epicstore.services;
 
 import com.epicstore.epicstore.dtos.CrearGrupoDTO;
+import com.epicstore.epicstore.dtos.GrupoResumenDTO;
 import com.epicstore.epicstore.models.GrupoModel;
+
+import java.util.ArrayList;
 
 public class GrupoService {
 
@@ -52,6 +55,15 @@ public class GrupoService {
             r.codigo = ERROR;
             r.mensaje = "Error: " + e.getMessage();
             return r;
+        }
+    }
+
+    public ArrayList<GrupoResumenDTO> listarGrupos(int idUsuario) {
+        try {
+            return model.listarGruposPorUsuario(idUsuario);
+        } catch (Exception e) {
+            System.err.println("Error al listar grupos: " + e.getMessage());
+            return new ArrayList<>();
         }
     }
 }
