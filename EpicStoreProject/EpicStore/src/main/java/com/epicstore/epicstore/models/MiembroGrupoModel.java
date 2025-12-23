@@ -1,10 +1,12 @@
 package com.epicstore.epicstore.models;
 
 import com.epicstore.epicstore.util.DBConnection;
+import com.epicstore.epicstore.dtos.MiembroGrupoDTO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 public class MiembroGrupoModel {
 
@@ -76,5 +78,36 @@ public class MiembroGrupoModel {
             ps.setInt(2, idUsuarioNuevo);
             return ps.executeUpdate();
         }
+    }
+
+    public ArrayList<MiembroGrupoDTO> listarMiembros(int idGrupo) {
+
+        String sql = "SELECT mg.id_usuario, u.nickname, mg.rol "
+                + "FROM MIEMBRO_GRUPO mg "
+                + "JOIN USUARIO u ON mg.id_usuario = u.id_usuario "
+                + "WHERE mg.id_grupo = ? "
+                + "ORDER BY (mg.rol = 'DUENIO') DESC, u.nickname ASC";
+
+        ArrayList<MiembroGrupoDTO> lista = new ArrayList<>();
+
+        try (Connection conn = abrirConexion(); PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, idGrupo);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    MiembroGrupoDTO dto = new MiembroGrupoDTO();
+                    dto.setIdUsuario(rs.getInt("id_usuario"));
+                    dto.setNickname(rs.getString("nickname"));
+                    dto.setRol(rs.getString("rol"));
+                    lista.add(dto);
+                }
+            }
+
+        } catch (Exception e) {
+            System.err.println("Error al listar miembros: " + e.getMessage());
+        }
+
+        return lista;
     }
 }
