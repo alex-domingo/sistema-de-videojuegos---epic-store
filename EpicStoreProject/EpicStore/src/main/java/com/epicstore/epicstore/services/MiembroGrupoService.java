@@ -1,9 +1,11 @@
 package com.epicstore.epicstore.services;
 
 import com.epicstore.epicstore.dtos.AgregarMiembroGrupoDTO;
+import com.epicstore.epicstore.dtos.MiembroGrupoDTO;
 import com.epicstore.epicstore.models.MiembroGrupoModel;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 public class MiembroGrupoService {
 
@@ -33,7 +35,7 @@ public class MiembroGrupoService {
             return r;
         }
 
-        // No permitir que el dueño "se agregue" a sí mismo (ya debe estar como DUENIO)
+        // No permitimos que el dueño "se agregue" a sí mismo (ya debe estar como DUENIO)
         if (dto.getIdDueno() == dto.getIdUsuarioNuevo()) {
             r.codigo = YA_ES_MIEMBRO;
             r.mensaje = "El dueño ya pertenece al grupo";
@@ -89,5 +91,9 @@ public class MiembroGrupoService {
             r.mensaje = "Error: " + e.getMessage();
             return r;
         }
+    }
+
+    public ArrayList<MiembroGrupoDTO> listarMiembros(int idGrupo) {
+        return model.listarMiembros(idGrupo);
     }
 }
