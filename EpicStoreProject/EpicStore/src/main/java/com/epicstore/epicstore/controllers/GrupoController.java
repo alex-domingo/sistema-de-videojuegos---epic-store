@@ -19,6 +19,46 @@ public class GrupoController extends HttpServlet {
     private final GrupoService service = new GrupoService();
 
     @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+
+        Gson gson = new Gson();
+        HashMap<String, Object> salida = new HashMap<>();
+
+        String idParam = request.getParameter("idUsuario");
+
+        try (PrintWriter out = response.getWriter()) {
+
+            if (idParam == null) {
+                response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                salida.put("exito", false);
+                salida.put("mensaje", "Falta el parámetro idUsuario");
+                out.print(gson.toJson(salida));
+                return;
+            }
+
+            int idUsuario = Integer.parseInt(idParam);
+            var lista = service.listarGrupos(idUsuario);
+
+            response.setStatus(HttpServletResponse.SC_OK);
+            salida.put("exito", true);
+            salida.put("mensaje", "Grupos del usuario");
+            salida.put("total", lista.size());
+            salida.put("datos", lista);
+
+            out.print(gson.toJson(salida));
+            out.flush();
+
+        } catch (NumberFormatException e) {
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            salida.put("exito", false);
+            salida.put("mensaje", "El parámetro idUsuario debe ser numérico");
+        }
+    }
+
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         response.setContentType("application/json");
