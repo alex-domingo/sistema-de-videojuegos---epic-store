@@ -1,5 +1,6 @@
 package com.epicstore.epicstore.controllers;
 
+import com.epicstore.epicstore.dtos.PublicarVideojuegoDTO;
 import com.epicstore.epicstore.services.VideojuegoEmpresaService;
 import com.google.gson.Gson;
 
@@ -61,6 +62,47 @@ public class EmpresaVideojuegosController extends HttpServlet {
 
             out.print(gson.toJson(salida));
             out.flush();
+        }
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+
+        Gson gson = new Gson();
+        HashMap<String, Object> salida = new HashMap<>();
+
+        try (PrintWriter out = response.getWriter()) {
+
+            Integer idEmpresa = obtenerIdEmpresaSesion(request);
+            if (idEmpresa == null) {
+                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                salida.put("exito", false);
+                salida.put("mensaje", "No autenticado como empresa");
+                out.print(gson.toJson(salida));
+                return;
+            }
+
+            PublicarVideojuegoDTO dto = gson.fromJson(request.getReader(), PublicarVideojuegoDTO.class);
+            VideojuegoEmpresaService.Resultado r = service.publicar(idEmpresa, dto);
+
+            if (r.exito) {
+                response.setStatus(HttpServletResponse.SC_CREATED);
+                salida.put("exito", true);
+                salida.put("mensaje", r.mensaje);
+                salida.put("idVideojuego", r.datos);
+            } else {
+                response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                salida.put("exito", false);
+                salida.put("mensaje", r.mensaje);
+            }
+
+            out.print(gson.toJson(salida));
+            out.flush();
+        } catch (Exception e) {
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
         }
     }
 }
