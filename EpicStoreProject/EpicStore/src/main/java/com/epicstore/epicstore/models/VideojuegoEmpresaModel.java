@@ -220,4 +220,23 @@ public class VideojuegoEmpresaModel {
             return false;
         }
     }
+
+    public boolean cambiarVenta(int idEmpresa, int idVideojuego, String ventaActiva) {
+
+        String sql = "UPDATE VIDEOJUEGO SET venta_activa = ? WHERE id_videojuego = ? AND id_empresa = ?";
+        DBConnection db = new DBConnection();
+
+        try (Connection conn = db.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, ventaActiva);
+            ps.setInt(2, idVideojuego);
+            ps.setInt(3, idEmpresa);
+
+            return ps.executeUpdate() > 0;
+
+        } catch (Exception e) {
+            System.err.println("Error al cambiar venta_activa: " + e.getMessage());
+            return false;
+        }
+    }
 }

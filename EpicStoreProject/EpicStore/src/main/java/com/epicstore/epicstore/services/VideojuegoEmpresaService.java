@@ -1,5 +1,6 @@
 package com.epicstore.epicstore.services;
 
+import com.epicstore.epicstore.dtos.CambiarVentaVideojuegoDTO;
 import com.epicstore.epicstore.dtos.EditarVideojuegoDTO;
 import com.epicstore.epicstore.dtos.PublicarVideojuegoDTO;
 import com.epicstore.epicstore.dtos.VideojuegoEmpresaDTO;
@@ -107,5 +108,33 @@ public class VideojuegoEmpresaService {
         }
 
         return new Resultado(true, "Videojuego editado correctamente");
+    }
+
+    public Resultado cambiarVenta(int idEmpresa, CambiarVentaVideojuegoDTO dto) {
+
+        if (dto == null) {
+            return new Resultado(false, "JSON inválido");
+        }
+        if (dto.getIdVideojuego() == null || dto.getVentaActiva() == null) {
+            return new Resultado(false, "Datos incompletos");
+        }
+
+        String estado = dto.getVentaActiva().trim().toUpperCase();
+        if (!"S".equals(estado) && !"N".equals(estado)) {
+            return new Resultado(false, "ventaActiva debe ser 'S' o 'N'");
+        }
+
+        int idVideojuego = dto.getIdVideojuego();
+
+        if (!model.existeVideojuegoEnEmpresa(idEmpresa, idVideojuego)) {
+            return new Resultado(false, "No puedes modificar este videojuego (no existe o no pertenece a tu empresa)");
+        }
+
+        boolean ok = model.cambiarVenta(idEmpresa, idVideojuego, estado);
+        if (!ok) {
+            return new Resultado(false, "No se pudo actualizar el estado de venta");
+        }
+
+        return new Resultado(true, "Estado de venta actualizado correctamente");
     }
 }
