@@ -127,4 +127,56 @@ public class MiembroGrupoController extends HttpServlet {
             salida.put("mensaje", "JSON inválido o datos incompletos");
         }
     }
+
+    @Override
+    protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws java.io.IOException {
+
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+
+        com.google.gson.Gson gson = new com.google.gson.Gson();
+        java.util.HashMap<String, Object> salida = new java.util.HashMap<>();
+
+        try (java.io.PrintWriter out = response.getWriter()) {
+
+            com.epicstore.epicstore.dtos.EliminarMiembroDTO dto
+                    = gson.fromJson(request.getReader(), com.epicstore.epicstore.dtos.EliminarMiembroDTO.class);
+
+            com.epicstore.epicstore.services.GrupoAdminService adminService
+                    = new com.epicstore.epicstore.services.GrupoAdminService();
+
+            var r = adminService.eliminarMiembro(dto);
+
+            if (r.codigo == com.epicstore.epicstore.services.GrupoAdminService.OK) {
+                response.setStatus(HttpServletResponse.SC_OK);
+                salida.put("exito", true);
+                salida.put("mensaje", r.mensaje);
+
+            } else if (r.codigo == com.epicstore.epicstore.services.GrupoAdminService.GRUPO_NO_EXISTE
+                    || r.codigo == com.epicstore.epicstore.services.GrupoAdminService.MIEMBRO_NO_EXISTE) {
+                response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+                salida.put("exito", false);
+                salida.put("mensaje", r.mensaje);
+
+            } else if (r.codigo == com.epicstore.epicstore.services.GrupoAdminService.NO_ES_DUENO
+                    || r.codigo == com.epicstore.epicstore.services.GrupoAdminService.NO_SE_PUEDE_ELIMINAR_DUENO) {
+                response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+                salida.put("exito", false);
+                salida.put("mensaje", r.mensaje);
+
+            } else {
+                response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                salida.put("exito", false);
+                salida.put("mensaje", r.mensaje);
+            }
+
+            out.print(gson.toJson(salida));
+            out.flush();
+
+        } catch (Exception e) {
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            salida.put("exito", false);
+            salida.put("mensaje", "JSON inválido o datos incompletos");
+        }
+    }
 }
