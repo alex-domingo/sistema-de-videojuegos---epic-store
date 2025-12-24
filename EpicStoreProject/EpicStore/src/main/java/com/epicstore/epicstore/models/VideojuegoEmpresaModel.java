@@ -141,4 +141,83 @@ public class VideojuegoEmpresaModel {
 
         return null;
     }
+
+    public boolean existeVideojuegoEnEmpresa(int idEmpresa, int idVideojuego) {
+        String sql = "SELECT 1 FROM VIDEOJUEGO WHERE id_videojuego = ? AND id_empresa = ? LIMIT 1";
+        DBConnection db = new DBConnection();
+
+        try (Connection conn = db.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, idVideojuego);
+            ps.setInt(2, idEmpresa);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                return rs.next();
+            }
+        } catch (Exception e) {
+            System.err.println("Error al validar videojuego en empresa: " + e.getMessage());
+            return false;
+        }
+    }
+
+    public boolean existeTituloEnEmpresaExcluyendo(int idEmpresa, String titulo, int idVideojuego) {
+        String sql = "SELECT 1 FROM VIDEOJUEGO "
+                + "WHERE id_empresa = ? AND LOWER(titulo) = LOWER(?) AND id_videojuego <> ? LIMIT 1";
+        DBConnection db = new DBConnection();
+
+        try (Connection conn = db.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, idEmpresa);
+            ps.setString(2, titulo);
+            ps.setInt(3, idVideojuego);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                return rs.next();
+            }
+        } catch (Exception e) {
+            System.err.println("Error al validar título duplicado (excluyendo): " + e.getMessage());
+            return true; // conservador
+        }
+    }
+
+    public boolean editarVideojuego(int idEmpresa, int idVideojuego, com.epicstore.epicstore.dtos.EditarVideojuegoDTO dto) {
+
+        String sql
+                = "UPDATE VIDEOJUEGO SET "
+                + "  id_clasificacion = ?, "
+                + "  titulo = ?, "
+                + "  descripcion = ?, "
+                + "  precio = ?, "
+                + "  requisitos_minimos = ?, "
+                + "  fecha_lanzamiento = ?, "
+                + "  imagen_portada = ? "
+                + "WHERE id_videojuego = ? AND id_empresa = ?";
+
+        DBConnection db = new DBConnection();
+
+        try (Connection conn = db.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, dto.getIdClasificacion());
+            ps.setString(2, dto.getTitulo());
+            ps.setString(3, dto.getDescripcion());
+            ps.setDouble(4, dto.getPrecio());
+            ps.setString(5, dto.getRequisitosMinimos());
+
+            if (dto.getFechaLanzamiento() == null || dto.getFechaLanzamiento().trim().isEmpty()) {
+                ps.setDate(6, null);
+            } else {
+                ps.setDate(6, java.sql.Date.valueOf(dto.getFechaLanzamiento()));
+            }
+
+            ps.setString(7, dto.getImagenPortada());
+            ps.setInt(8, idVideojuego);
+            ps.setInt(9, idEmpresa);
+
+            return ps.executeUpdate() > 0;
+
+        } catch (Exception e) {
+            System.err.println("Error al editar videojuego: " + e.getMessage());
+            return false;
+        }
+    }
 }

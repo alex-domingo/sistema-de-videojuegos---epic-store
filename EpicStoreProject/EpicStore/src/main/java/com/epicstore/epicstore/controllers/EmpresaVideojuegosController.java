@@ -1,5 +1,6 @@
 package com.epicstore.epicstore.controllers;
 
+import com.epicstore.epicstore.dtos.EditarVideojuegoDTO;
 import com.epicstore.epicstore.dtos.PublicarVideojuegoDTO;
 import com.epicstore.epicstore.services.VideojuegoEmpresaService;
 import com.google.gson.Gson;
@@ -101,6 +102,60 @@ public class EmpresaVideojuegosController extends HttpServlet {
 
             out.print(gson.toJson(salida));
             out.flush();
+        } catch (Exception e) {
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+        }
+    }
+
+    @Override
+    protected void doPut(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+
+        Gson gson = new Gson();
+        HashMap<String, Object> salida = new HashMap<>();
+
+        try (PrintWriter out = response.getWriter()) {
+
+            Integer idEmpresa = obtenerIdEmpresaSesion(request);
+            if (idEmpresa == null) {
+                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                salida.put("exito", false);
+                salida.put("mensaje", "No autenticado como empresa");
+                out.print(gson.toJson(salida));
+                return;
+            }
+
+            String idParam = request.getParameter("id");
+            if (idParam == null) {
+                response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                salida.put("exito", false);
+                salida.put("mensaje", "Falta parámetro id");
+                out.print(gson.toJson(salida));
+                return;
+            }
+
+            int idVideojuego = Integer.parseInt(idParam);
+
+            EditarVideojuegoDTO dto = gson.fromJson(request.getReader(), EditarVideojuegoDTO.class);
+            VideojuegoEmpresaService.Resultado r = service.editar(idEmpresa, idVideojuego, dto);
+
+            if (r.exito) {
+                response.setStatus(HttpServletResponse.SC_OK);
+                salida.put("exito", true);
+                salida.put("mensaje", r.mensaje);
+            } else {
+                response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                salida.put("exito", false);
+                salida.put("mensaje", r.mensaje);
+            }
+
+            out.print(gson.toJson(salida));
+            out.flush();
+
+        } catch (NumberFormatException e) {
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
         } catch (Exception e) {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
         }

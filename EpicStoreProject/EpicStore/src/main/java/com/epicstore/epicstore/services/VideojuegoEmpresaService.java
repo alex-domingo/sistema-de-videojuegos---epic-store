@@ -1,5 +1,6 @@
 package com.epicstore.epicstore.services;
 
+import com.epicstore.epicstore.dtos.EditarVideojuegoDTO;
 import com.epicstore.epicstore.dtos.PublicarVideojuegoDTO;
 import com.epicstore.epicstore.dtos.VideojuegoEmpresaDTO;
 import com.epicstore.epicstore.models.VideojuegoEmpresaModel;
@@ -66,5 +67,45 @@ public class VideojuegoEmpresaService {
         }
 
         return new Resultado(true, "Videojuego publicado correctamente", idNuevo);
+    }
+
+    public Resultado editar(int idEmpresa, int idVideojuego, EditarVideojuegoDTO dto) {
+
+        if (dto == null) {
+            return new Resultado(false, "JSON inválido");
+        }
+
+        if (dto.getIdClasificacion() == null
+                || dto.getTitulo() == null || dto.getTitulo().trim().isEmpty()
+                || dto.getDescripcion() == null || dto.getDescripcion().trim().isEmpty()
+                || dto.getPrecio() == null) {
+            return new Resultado(false, "Datos incompletos");
+        }
+
+        if (dto.getPrecio() <= 0) {
+            return new Resultado(false, "El precio debe ser mayor a 0");
+        }
+
+        dto.setTitulo(dto.getTitulo().trim());
+        dto.setDescripcion(dto.getDescripcion().trim());
+
+        if (!model.existeVideojuegoEnEmpresa(idEmpresa, idVideojuego)) {
+            return new Resultado(false, "No puedes editar este videojuego (no existe o no pertenece a tu empresa)");
+        }
+
+        if (!model.existeClasificacion(dto.getIdClasificacion())) {
+            return new Resultado(false, "La clasificación indicada no existe");
+        }
+
+        if (model.existeTituloEnEmpresaExcluyendo(idEmpresa, dto.getTitulo(), idVideojuego)) {
+            return new Resultado(false, "Ya existe otro videojuego con ese título en tu empresa");
+        }
+
+        boolean ok = model.editarVideojuego(idEmpresa, idVideojuego, dto);
+        if (!ok) {
+            return new Resultado(false, "No se pudo editar el videojuego");
+        }
+
+        return new Resultado(true, "Videojuego editado correctamente");
     }
 }
