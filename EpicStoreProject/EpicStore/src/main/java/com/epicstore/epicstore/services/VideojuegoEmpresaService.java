@@ -1,6 +1,8 @@
 package com.epicstore.epicstore.services;
 
 import com.epicstore.epicstore.dtos.CambiarVentaVideojuegoDTO;
+import com.epicstore.epicstore.dtos.CambiarVisibilidadComentariosGlobalDTO;
+import com.epicstore.epicstore.dtos.CambiarVisibilidadComentariosJuegoDTO;
 import com.epicstore.epicstore.dtos.EditarVideojuegoDTO;
 import com.epicstore.epicstore.dtos.PublicarVideojuegoDTO;
 import com.epicstore.epicstore.dtos.VideojuegoEmpresaDTO;
@@ -136,5 +138,47 @@ public class VideojuegoEmpresaService {
         }
 
         return new Resultado(true, "Estado de venta actualizado correctamente");
+    }
+
+    public Resultado cambiarVisibilidadGlobal(int idEmpresa, CambiarVisibilidadComentariosGlobalDTO dto) {
+        if (dto == null || dto.getComentariosVisiblesGlobal() == null) {
+            return new Resultado(false, "Datos incompletos");
+        }
+
+        String estado = dto.getComentariosVisiblesGlobal().trim().toUpperCase();
+        if (!"S".equals(estado) && !"N".equals(estado)) {
+            return new Resultado(false, "comentariosVisiblesGlobal debe ser 'S' o 'N'");
+        }
+
+        boolean ok = model.cambiarComentariosVisiblesGlobal(idEmpresa, estado);
+        if (!ok) {
+            return new Resultado(false, "No se pudo actualizar la visibilidad global");
+        }
+
+        return new Resultado(true, "Visibilidad global de comentarios actualizada correctamente");
+    }
+
+    public Resultado cambiarVisibilidadPorJuego(int idEmpresa, CambiarVisibilidadComentariosJuegoDTO dto) {
+        if (dto == null || dto.getIdVideojuego() == null || dto.getComentariosVisibles() == null) {
+            return new Resultado(false, "Datos incompletos");
+        }
+
+        String estado = dto.getComentariosVisibles().trim().toUpperCase();
+        if (!"S".equals(estado) && !"N".equals(estado)) {
+            return new Resultado(false, "comentariosVisibles debe ser 'S' o 'N'");
+        }
+
+        int idVideojuego = dto.getIdVideojuego();
+
+        if (!model.existeVideojuegoEnEmpresa(idEmpresa, idVideojuego)) {
+            return new Resultado(false, "No puedes modificar este videojuego (no existe o no pertenece a tu empresa)");
+        }
+
+        boolean ok = model.cambiarComentariosVisiblesPorJuego(idEmpresa, idVideojuego, estado);
+        if (!ok) {
+            return new Resultado(false, "No se pudo actualizar la visibilidad del videojuego");
+        }
+
+        return new Resultado(true, "Visibilidad de comentarios del videojuego actualizada correctamente");
     }
 }

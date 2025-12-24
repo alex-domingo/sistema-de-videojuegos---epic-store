@@ -239,4 +239,37 @@ public class VideojuegoEmpresaModel {
             return false;
         }
     }
+
+    public boolean cambiarComentariosVisiblesGlobal(int idEmpresa, String estado) {
+        String sql = "UPDATE EMPRESA SET comentarios_visibles_global = ? WHERE id_empresa = ?";
+        DBConnection db = new DBConnection();
+
+        try (Connection conn = db.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, estado);
+            ps.setInt(2, idEmpresa);
+            return ps.executeUpdate() > 0;
+
+        } catch (Exception e) {
+            System.err.println("Error al cambiar visibilidad global: " + e.getMessage());
+            return false;
+        }
+    }
+
+    public boolean cambiarComentariosVisiblesPorJuego(int idEmpresa, int idVideojuego, String estado) {
+        String sql = "UPDATE VIDEOJUEGO SET comentarios_visibles = ? WHERE id_videojuego = ? AND id_empresa = ?";
+        DBConnection db = new DBConnection();
+
+        try (Connection conn = db.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, estado);
+            ps.setInt(2, idVideojuego);
+            ps.setInt(3, idEmpresa);
+            return ps.executeUpdate() > 0;
+
+        } catch (Exception e) {
+            System.err.println("Error al cambiar visibilidad por juego: " + e.getMessage());
+            return false;
+        }
+    }
 }
