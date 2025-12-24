@@ -1,9 +1,11 @@
 package com.epicstore.epicstore.models;
 
+import com.epicstore.epicstore.dtos.PublicarVideojuegoDTO;
 import com.epicstore.epicstore.dtos.VideojuegoEmpresaDTO;
 import com.epicstore.epicstore.util.DBConnection;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -63,5 +65,80 @@ public class VideojuegoEmpresaModel {
         }
 
         return lista;
+    }
+
+    public boolean existeClasificacion(int idClasificacion) {
+        String sql = "SELECT 1 FROM CLASIFICACION_EDAD WHERE id_clasificacion = ? LIMIT 1";
+        DBConnection db = new DBConnection();
+
+        try (Connection conn = db.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, idClasificacion);
+            try (ResultSet rs = ps.executeQuery()) {
+                return rs.next();
+            }
+        } catch (Exception e) {
+            System.err.println("Error al validar clasificación: " + e.getMessage());
+            return false;
+        }
+    }
+
+    public boolean existeTituloEnEmpresa(int idEmpresa, String titulo) {
+        String sql = "SELECT 1 FROM VIDEOJUEGO WHERE id_empresa = ? AND LOWER(titulo) = LOWER(?) LIMIT 1";
+        DBConnection db = new DBConnection();
+
+        try (Connection conn = db.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, idEmpresa);
+            ps.setString(2, titulo);
+            try (ResultSet rs = ps.executeQuery()) {
+                return rs.next();
+            }
+        } catch (Exception e) {
+            System.err.println("Error al validar título duplicado: " + e.getMessage());
+            return true; // conservador
+        }
+    }
+
+    public Integer publicarVideojuego(int idEmpresa, PublicarVideojuegoDTO dto) {
+        String sql
+                = "INSERT INTO VIDEOJUEGO ("
+                + "  id_empresa, id_clasificacion, titulo, descripcion, precio, requisitos_minimos, "
+                + "  fecha_lanzamiento, imagen_portada, venta_activa, comentarios_visibles"
+                + ") VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'S', 'S')";
+
+        DBConnection db = new DBConnection();
+
+        try (Connection conn = db.getConnection(); PreparedStatement ps = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
+
+            ps.setInt(1, idEmpresa);
+            ps.setInt(2, dto.getIdClasificacion());
+            ps.setString(3, dto.getTitulo());
+            ps.setString(4, dto.getDescripcion());
+            ps.setDouble(5, dto.getPrecio());
+            ps.setString(6, dto.getRequisitosMinimos());
+
+            if (dto.getFechaLanzamiento() == null || dto.getFechaLanzamiento().trim().isEmpty()) {
+                ps.setDate(7, null);
+            } else {
+                ps.setDate(7, Date.valueOf(dto.getFechaLanzamiento()));
+            }
+
+            ps.setString(8, dto.getImagenPortada());
+
+            int filas = ps.executeUpdate();
+            if (filas == 0) {
+                return null;
+            }
+
+            try (ResultSet keys = ps.getGeneratedKeys()) {
+                if (keys.next()) {
+                    return keys.getInt(1);
+                }
+            }
+
+        } catch (Exception e) {
+            System.err.println("Error al publicar videojuego: " + e.getMessage());
+        }
+
+        return null;
     }
 }
