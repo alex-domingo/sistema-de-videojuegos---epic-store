@@ -35,4 +35,25 @@ public class ReportesUsuarioService {
         }
         return Date.valueOf(LocalDate.parse(s.trim()));
     }
+
+    public Resultado valoracionesBiblioteca(int idUsuario) {
+        return new Resultado(true, "Análisis de biblioteca: valoraciones", model.valoracionesBiblioteca(idUsuario));
+    }
+
+    public Resultado categoriasFavoritas(int idUsuario, String limitStr) {
+        int limit = 10;
+        if (limitStr != null) {
+            try {
+                limit = Integer.parseInt(limitStr);
+            } catch (Exception ignored) {
+            }
+            if (limit <= 0) {
+                limit = 10;
+            }
+            if (limit > 50) {
+                limit = 50;
+            }
+        }
+        return new Resultado(true, "Análisis de biblioteca: categorías favoritas", model.categoriasFavoritas(idUsuario, limit));
+    }
 }
