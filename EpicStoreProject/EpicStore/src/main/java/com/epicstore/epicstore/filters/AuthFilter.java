@@ -29,7 +29,8 @@ public class AuthFilter implements Filter {
             "/api/videojuegos",
             "/api/usuarios/registro",
             "/api/usuarios/buscar",
-            "/api/perfiles/usuario"
+            "/api/perfiles/usuario",
+            "/api/empresas/perfil"
     );
 
     @Override
@@ -52,17 +53,10 @@ public class AuthFilter implements Filter {
             return;
         }
 
-        // 2) Casos especiales:
+        // 2) Caso especial:
         //    - GET público (listar)
         //    - POST requiere sesión USUARIO
         if ("/api/comentarios".equals(path) && "GET".equalsIgnoreCase(method)) {
-            chain.doFilter(req, res);
-            return;
-        }
-
-        // Perfil público de empresa: GET permitido sin sesión
-        // - POST requiere sesion EMPRESA
-        if ("/api/empresas/perfil".equals(path) && "GET".equalsIgnoreCase(method)) {
             chain.doFilter(req, res);
             return;
         }
