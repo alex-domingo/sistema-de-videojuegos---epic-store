@@ -3,6 +3,7 @@ package com.epicstore.epicstore.models;
 import com.epicstore.epicstore.dtos.ReporteCalificacionJuegoDTO;
 import com.epicstore.epicstore.dtos.ReporteMejorComentarioDTO;
 import com.epicstore.epicstore.dtos.ReportePeorCalificacionDTO;
+import com.epicstore.epicstore.dtos.ReporteTopJuegoEmpresaDTO;
 import com.epicstore.epicstore.dtos.ReporteVentaPropiaDTO;
 import com.epicstore.epicstore.util.DBConnection;
 
@@ -246,6 +247,60 @@ public class ReportesEmpresaModel {
 
         } catch (Exception e) {
             System.err.println("Error peores calificaciones: " + e.getMessage());
+        }
+
+        return lista;
+    }
+
+    public ArrayList<ReporteTopJuegoEmpresaDTO> top5JuegosMasVendidos(int idEmpresa, Date desde, Date hasta) {
+
+        StringBuilder sql = new StringBuilder();
+        sql.append("SELECT ")
+                .append("  v.id_videojuego, v.titulo, ")
+                .append("  COUNT(c.id_compra) AS total_ventas, ")
+                .append("  SUM(c.monto_empresa) AS monto_neto ")
+                .append("FROM COMPRA c ")
+                .append("JOIN VIDEOJUEGO v ON v.id_videojuego = c.id_videojuego ")
+                .append("WHERE v.id_empresa = ? ");
+
+        if (desde != null) {
+            sql.append("AND c.fecha_compra >= ? ");
+        }
+        if (hasta != null) {
+            sql.append("AND c.fecha_compra <= ? ");
+        }
+
+        sql.append("GROUP BY v.id_videojuego, v.titulo ")
+                .append("ORDER BY total_ventas DESC, monto_neto DESC ")
+                .append("LIMIT 5;");
+
+        ArrayList<ReporteTopJuegoEmpresaDTO> lista = new ArrayList<>();
+        DBConnection db = new DBConnection();
+
+        try (Connection conn = db.getConnection(); PreparedStatement ps = conn.prepareStatement(sql.toString())) {
+
+            int idx = 1;
+            ps.setInt(idx++, idEmpresa);
+            if (desde != null) {
+                ps.setDate(idx++, desde);
+            }
+            if (hasta != null) {
+                ps.setDate(idx++, hasta);
+            }
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    ReporteTopJuegoEmpresaDTO dto = new ReporteTopJuegoEmpresaDTO();
+                    dto.setIdVideojuego(rs.getInt("id_videojuego"));
+                    dto.setTitulo(rs.getString("titulo"));
+                    dto.setTotalVentas(rs.getInt("total_ventas"));
+                    dto.setMontoNeto(rs.getDouble("monto_neto"));
+                    lista.add(dto);
+                }
+            }
+
+        } catch (Exception e) {
+            System.err.println("Error reporte top5 juegos: " + e.getMessage());
         }
 
         return lista;
