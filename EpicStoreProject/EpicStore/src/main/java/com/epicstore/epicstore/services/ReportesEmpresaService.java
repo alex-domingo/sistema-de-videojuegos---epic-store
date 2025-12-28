@@ -73,6 +73,12 @@ public class ReportesEmpresaService {
         return new Resultado(true, "Reporte de feedback: peores calificaciones", model.peoresCalificaciones(idEmpresa, desde, hasta, limit));
     }
 
+    public Resultado top5Juegos(int idEmpresa, String desdeStr, String hastaStr) {
+        java.sql.Date desde = parseFecha(desdeStr);
+        java.sql.Date hasta = parseFecha(hastaStr);
+        return new Resultado(true, "Top 5 juegos más vendidos", model.top5JuegosMasVendidos(idEmpresa, desde, hasta));
+    }
+
     private Date parseFecha(String s) {
         if (s == null || s.trim().isEmpty()) {
             return null;
