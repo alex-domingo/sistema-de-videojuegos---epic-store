@@ -29,11 +29,54 @@ public class ReportesEmpresaService {
         return new Resultado(true, "Reporte de ventas propias", model.ventasPropias(idEmpresa, desde, hasta));
     }
 
+    public Resultado feedbackCalificaciones(int idEmpresa, String desdeStr, String hastaStr) {
+        Date desde = parseFecha(desdeStr);
+        Date hasta = parseFecha(hastaStr);
+        return new Resultado(true, "Reporte de feedback: calificaciones", model.feedbackCalificaciones(idEmpresa, desde, hasta));
+    }
+
+    public Resultado mejoresComentarios(int idEmpresa, String desdeStr, String hastaStr, String limitStr) {
+        Date desde = parseFecha(desdeStr);
+        Date hasta = parseFecha(hastaStr);
+        int limit = 10;
+        if (limitStr != null) {
+            try {
+                limit = Integer.parseInt(limitStr);
+            } catch (Exception ignored) {
+            }
+            if (limit <= 0) {
+                limit = 10;
+            }
+            if (limit > 50) {
+                limit = 50;
+            }
+        }
+        return new Resultado(true, "Reporte de feedback: mejores comentarios", model.mejoresComentarios(idEmpresa, desde, hasta, limit));
+    }
+
+    public Resultado peoresCalificaciones(int idEmpresa, String desdeStr, String hastaStr, String limitStr) {
+        Date desde = parseFecha(desdeStr);
+        Date hasta = parseFecha(hastaStr);
+        int limit = 10;
+        if (limitStr != null) {
+            try {
+                limit = Integer.parseInt(limitStr);
+            } catch (Exception ignored) {
+            }
+            if (limit <= 0) {
+                limit = 10;
+            }
+            if (limit > 50) {
+                limit = 50;
+            }
+        }
+        return new Resultado(true, "Reporte de feedback: peores calificaciones", model.peoresCalificaciones(idEmpresa, desde, hasta, limit));
+    }
+
     private Date parseFecha(String s) {
         if (s == null || s.trim().isEmpty()) {
             return null;
         }
-        LocalDate ld = LocalDate.parse(s.trim()); // yyyy-MM-dd
-        return Date.valueOf(ld);
+        return Date.valueOf(LocalDate.parse(s.trim()));
     }
 }
