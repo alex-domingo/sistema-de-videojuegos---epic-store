@@ -2,6 +2,7 @@ package com.epicstore.epicstore.models;
 
 import com.epicstore.epicstore.dtos.HistorialGastoDTO;
 import com.epicstore.epicstore.dtos.ReporteCategoriaFavoritaDTO;
+import com.epicstore.epicstore.dtos.ReporteUsoBibliotecaFamiliarDTO;
 import com.epicstore.epicstore.dtos.ReporteValoracionBibliotecaDTO;
 import com.epicstore.epicstore.util.DBConnection;
 
@@ -147,6 +148,65 @@ public class ReportesUsuarioModel {
 
         } catch (Exception e) {
             System.err.println("Error reporte categorías favoritas: " + e.getMessage());
+        }
+
+        return lista;
+    }
+
+    public ArrayList<ReporteUsoBibliotecaFamiliarDTO> usoBibliotecaFamiliar(int idUsuario) {
+
+        String sql
+                = "SELECT "
+                + "  v.id_videojuego, v.titulo, "
+                + "  COALESCE(b.id_grupo_origen, 0) AS id_grupo_origen, "
+                + "  b.estado_instalacion, b.fecha_ultimo_cambio_estado, "
+                + "  CASE WHEN b.estado_instalacion = 'INSTALADO' THEN 1 ELSE 0 END AS veces_instalado_simulado, "
+                + "  CASE "
+                + "    WHEN b.estado_instalacion = 'INSTALADO' AND b.fecha_ultimo_cambio_estado IS NOT NULL "
+                + "      THEN DATEDIFF(CURDATE(), DATE(b.fecha_ultimo_cambio_estado)) "
+                + "    ELSE 0 "
+                + "  END AS dias_instalado_simulado, "
+                + "  (SELECT AVG(c.calificacion) "
+                + "   FROM COMENTARIO c "
+                + "   WHERE c.id_videojuego = v.id_videojuego "
+                + "     AND c.visible = 'S' "
+                + "     AND c.id_comentario_padre IS NULL) AS promedio_comunidad "
+                + "FROM BIBLIOTECA_JUEGO b "
+                + "JOIN VIDEOJUEGO v ON v.id_videojuego = b.id_videojuego "
+                + "WHERE b.id_usuario = ? "
+                + "  AND b.tipo_propiedad = 'PRESTADO' "
+                + "ORDER BY dias_instalado_simulado DESC, veces_instalado_simulado DESC, v.titulo ASC;";
+
+        ArrayList<ReporteUsoBibliotecaFamiliarDTO> lista = new ArrayList<>();
+        DBConnection db = new DBConnection();
+
+        try (Connection conn = db.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, idUsuario);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    ReporteUsoBibliotecaFamiliarDTO dto = new ReporteUsoBibliotecaFamiliarDTO();
+                    dto.setIdVideojuego(rs.getInt("id_videojuego"));
+                    dto.setTitulo(rs.getString("titulo"));
+                    dto.setIdGrupoOrigen(rs.getInt("id_grupo_origen"));
+                    dto.setEstadoInstalacion(rs.getString("estado_instalacion"));
+
+                    Object fec = rs.getObject("fecha_ultimo_cambio_estado");
+                    dto.setFechaUltimoCambioEstado(fec != null ? rs.getTimestamp("fecha_ultimo_cambio_estado").toString() : null);
+
+                    dto.setVecesInstaladoSimulado(rs.getInt("veces_instalado_simulado"));
+                    dto.setTiempoInstaladoDiasSimulado(rs.getInt("dias_instalado_simulado"));
+
+                    Object prom = rs.getObject("promedio_comunidad");
+                    dto.setPromedioComunidad(prom != null ? rs.getDouble("promedio_comunidad") : null);
+
+                    lista.add(dto);
+                }
+            }
+
+        } catch (Exception e) {
+            System.err.println("Error reporte uso biblioteca familiar: " + e.getMessage());
         }
 
         return lista;

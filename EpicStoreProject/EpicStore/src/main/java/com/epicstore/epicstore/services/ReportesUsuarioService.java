@@ -56,4 +56,8 @@ public class ReportesUsuarioService {
         }
         return new Resultado(true, "Análisis de biblioteca: categorías favoritas", model.categoriasFavoritas(idUsuario, limit));
     }
+
+    public Resultado usoBibliotecaFamiliar(int idUsuario) {
+        return new Resultado(true, "Uso de biblioteca familiar: préstamos", model.usoBibliotecaFamiliar(idUsuario));
+    }
 }
