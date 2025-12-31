@@ -9,7 +9,11 @@
             <div>
                 <h2 class="title">{{ v.titulo }}</h2>
                 <div class="sub">
-                    <span><b>Empresa:</b> {{ v.empresa }}</span>
+                    <span><b>Empresa:</b>
+                        <a class="empresa-link" [routerLink]="['/empresa', v.idEmpresa]">
+                            {{ v.empresa }}
+                        </a>
+                    </span>
                     <span class="dot">•</span>
                     <span><b>Lanzamiento:</b> {{ v.fechaLanzamiento }}</span>
                 </div>
