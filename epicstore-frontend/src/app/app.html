@@ -1,2 +1,51 @@
-<h1>{{ title() }}</h1>
-<router-outlet></router-outlet>
+<header class="nav">
+    <div class="brand">
+        <a routerLink="/">{{ title() }}</a>
+    </div>
+
+    <nav class="links">
+        <a routerLink="/">Catálogo</a>
+    </nav>
+
+    <div class="right">
+        <ng-container *ngIf="state.loading(); else loaded">
+            <span class="muted">Cargando sesión...</span>
+        </ng-container>
+
+        <ng-template #loaded>
+            <ng-container *ngIf="state.autenticado(); else guest">
+
+                <!-- Usuario -->
+                <ng-container *ngIf="state.esUsuario()">
+                    <span class="muted">
+                        Hola, <b>{{ state.displayName() }}</b>
+                        <span class="badge">{{ state.badgeText() }}</span>
+                    </span>
+                </ng-container>
+
+                <!-- Empresa -->
+                <ng-container *ngIf="state.esEmpresa()">
+                    <span class="muted">
+                        Hola, <b>{{ state.displayName() }}</b>
+                        <span class="badge">{{ state.badgeText() }}</span>
+                    </span>
+                </ng-container>
+
+                <button class="btn" (click)="logout()" [disabled]="cerrando()">
+                    {{ cerrando() ? 'Cerrando...' : 'Cerrar sesión' }}
+                </button>
+            </ng-container>
+
+            <ng-template #guest>
+                <a class="btn-link" routerLink="/login">Login usuario</a>
+                <a class="btn-link" routerLink="/login-empresa">Login empresa</a>
+            </ng-template>
+        </ng-template>
+    </div>
+</header>
+
+<p class="error" *ngIf="errorLogout()">{{ errorLogout() }}</p>
+
+<main class="page">
+    <router-outlet></router-outlet>
+</main>

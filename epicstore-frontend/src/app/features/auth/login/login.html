@@ -1,0 +1,23 @@
+<h2>Login Usuario</h2>
+
+<form (ngSubmit)="submit()">
+    <div>
+        <label>Login</label><br />
+        <input [ngModel]="login()" (ngModelChange)="login.set($event)" name="login" />
+    </div>
+
+    <div style="margin-top:10px;">
+        <label>Password</label><br />
+        <input type="password" [ngModel]="password()" (ngModelChange)="password.set($event)" name="password" />
+    </div>
+
+    <p *ngIf="error()" style="color:#ff6b6b;">{{ error() }}</p>
+
+    <button type="submit" [disabled]="loading()" style="margin-top:12px;">
+        {{ loading() ? 'Ingresando...' : 'Ingresar' }}
+    </button>
+</form>
+
+<p style="margin-top:12px;">
+    ¿Eres empresa? <a routerLink="/login-empresa">Login empresa</a>
+</p>
