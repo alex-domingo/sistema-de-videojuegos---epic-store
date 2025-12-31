@@ -23,10 +23,10 @@ export class Biblioteca {
   error = signal<string | null>(null);
   mensaje = signal<string | null>(null);
 
-  // ⬇️ respuesta completa
+  // respuesta completa
   resp = signal<ApiResponse<BibliotecaItem[]> | null>(null);
 
-  // ⬇️ lista cómoda para el template
+  // listamos el template de forma cómoda
   items = computed(() => this.resp()?.datos ?? []);
 
   // ⬇️ estado por videojuego (para deshabilitar botón individual)
@@ -59,9 +59,7 @@ export class Biblioteca {
     });
   }
 
-  // ==========================================================
-  // ✅ PASO 3: CAMBIAR ESTADO DE INSTALACIÓN (INSTALAR / DESINSTALAR)
-  // ==========================================================
+  // CAMBIAMOS ESTADO DE INSTALACIÓN (INSTALAR / DESINSTALAR)
   toggleInstalacion(item: BibliotecaItem) {
     const s = this.session.session();
     if (!s || s.autenticado !== true || s.tipoSesion !== 'USUARIO') return;
@@ -71,6 +69,15 @@ export class Biblioteca {
 
     const nuevoEstado: EstadoInstalacion =
       item.estadoInstalacion === 'INSTALADO' ? 'NO_INSTALADO' : 'INSTALADO';
+
+    // validación: solo 1 PRESTADO instalado
+    if (item.tipoPropiedad === 'PRESTADO' && nuevoEstado === 'INSTALADO') {
+      if (this.hayOtroPrestadoInstalado(item.idVideojuego)) {
+        this.mensaje.set(null);
+        this.error.set('Solo puedes tener 1 juego PRESTADO instalado a la vez. Desinstala el otro primero.');
+        return;
+      }
+    }
 
     // marcar solo este juego como "guardando"
     this.guardando.update((m) => ({ ...m, [idVideojuego]: true }));
@@ -85,7 +92,7 @@ export class Biblioteca {
       next: (r) => {
         this.mensaje.set(r.mensaje);
 
-        // 🔁 actualización local (sin recargar todo)
+        // actualización local (sin recargar todo)
         const current = this.resp();
         if (current) {
           const updated = current.datos.map((x) =>
@@ -108,5 +115,16 @@ export class Biblioteca {
         this.guardando.update((m) => ({ ...m, [idVideojuego]: false }));
       }
     });
+  }
+
+  private hayOtroPrestadoInstalado(idVideojuegoActual: number): boolean {
+    const current = this.resp();
+    if (!current) return false;
+
+    return current.datos.some(x =>
+      x.idVideojuego !== idVideojuegoActual &&
+      x.tipoPropiedad === 'PRESTADO' &&
+      x.estadoInstalacion === 'INSTALADO'
+    );
   }
 }
