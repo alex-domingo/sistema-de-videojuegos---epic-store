@@ -1,12 +1,72 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { API_BASE } from '../config/api.config';
 
-@Injectable({ providedIn: 'root' })
+@Injectable({
+    providedIn: 'root'
+})
 export class ApiService {
     constructor(private http: HttpClient) { }
 
-    get<T>(path: string, params?: Record<string, string | number | boolean>) {
-        return this.http.get<T>(`${API_BASE}${path}`, { params: params as any });
+    // ---------- GET ----------
+    get<T>(path: string, params?: Record<string, any>) {
+        let httpParams = new HttpParams();
+
+        if (params) {
+            Object.keys(params).forEach((key) => {
+                const value = params[key];
+                if (value !== undefined && value !== null) {
+                    httpParams = httpParams.set(key, value);
+                }
+            });
+        }
+
+        return this.http.get<T>(
+            `${API_BASE}${path}`,
+            {
+                params: httpParams,
+                withCredentials: true
+            }
+        );
+    }
+
+    // ---------- POST ----------
+    post<T>(path: string, body: unknown) {
+        return this.http.post<T>(
+            `${API_BASE}${path}`,
+            body,
+            { withCredentials: true }
+        );
+    }
+
+    // ---------- PUT ----------
+    put<T>(path: string, body: unknown) {
+        return this.http.put<T>(
+            `${API_BASE}${path}`,
+            body,
+            { withCredentials: true }
+        );
+    }
+
+    // ---------- DELETE ----------
+    delete<T>(path: string, params?: Record<string, any>) {
+        let httpParams = new HttpParams();
+
+        if (params) {
+            Object.keys(params).forEach((key) => {
+                const value = params[key];
+                if (value !== undefined && value !== null) {
+                    httpParams = httpParams.set(key, value);
+                }
+            });
+        }
+
+        return this.http.delete<T>(
+            `${API_BASE}${path}`,
+            {
+                params: httpParams,
+                withCredentials: true
+            }
+        );
     }
 }
