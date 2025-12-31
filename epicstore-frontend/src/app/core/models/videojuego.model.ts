@@ -11,7 +11,7 @@ export interface VideojuegoListadoItem {
 
 export interface VideojuegoDetalle {
     idVideojuego: number;
-    idEmpresa: number; // ✅ nuevo
+    idEmpresa: number; // nuevo
     titulo: string;
     descripcion: string;
     precio: number;
