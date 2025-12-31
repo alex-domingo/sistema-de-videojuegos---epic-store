@@ -60,7 +60,9 @@ public class VideojuegoModel {
     public VideojuegoDetalleDTO obtenerDetallePorId(int idVideojuego) {
 
         String sql = "SELECT "
-                + " v.id_videojuego, v.titulo, v.descripcion, v.precio, "
+                + " v.id_videojuego, "
+                + " v.id_empresa AS id_empresa, "
+                + " v.titulo, v.descripcion, v.precio, "
                 + " v.requisitos_minimos, v.fecha_lanzamiento, v.imagen_portada, "
                 + " e.nombre AS empresa, "
                 + " c.codigo AS clasificacion, c.edad_minima, "
@@ -71,7 +73,7 @@ public class VideojuegoModel {
                 + "LEFT JOIN COMENTARIO co ON co.id_videojuego = v.id_videojuego "
                 + "WHERE v.id_videojuego = ? "
                 + "GROUP BY "
-                + " v.id_videojuego, v.titulo, v.descripcion, v.precio, "
+                + " v.id_videojuego, v.id_empresa, v.titulo, v.descripcion, v.precio, "
                 + " v.requisitos_minimos, v.fecha_lanzamiento, v.imagen_portada, "
                 + " e.nombre, c.codigo, c.edad_minima";
 
@@ -86,6 +88,7 @@ public class VideojuegoModel {
             if (rs.next()) {
                 dto = new VideojuegoDetalleDTO();
                 dto.setIdVideojuego(rs.getInt("id_videojuego"));
+                dto.setIdEmpresa(rs.getInt("id_empresa")); // CLAVE
                 dto.setTitulo(rs.getString("titulo"));
                 dto.setDescripcion(rs.getString("descripcion"));
                 dto.setPrecio(rs.getDouble("precio"));
@@ -128,5 +131,4 @@ public class VideojuegoModel {
 
         return dto;
     }
-
 }

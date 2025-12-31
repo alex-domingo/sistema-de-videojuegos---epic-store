@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class VideojuegoDetalleDTO {
 
     private int idVideojuego;
+    private int idEmpresa;
     private String titulo;
     private String descripcion;
     private double precio;
@@ -117,5 +118,13 @@ public class VideojuegoDetalleDTO {
 
     public void setCalificacionPromedio(double calificacionPromedio) {
         this.calificacionPromedio = calificacionPromedio;
+    }
+
+    public int getIdEmpresa() {
+        return idEmpresa;
+    }
+
+    public void setIdEmpresa(int idEmpresa) {
+        this.idEmpresa = idEmpresa;
     }
 }
