@@ -1,0 +1,85 @@
+.page {
+    padding: 16px;
+    font-family: Arial, sans-serif;
+}
+
+.back {
+    display: inline-block;
+    margin-bottom: 12px;
+    text-decoration: none;
+}
+
+.error {
+    color: #ff6b6b;
+}
+
+.card {
+    border: 1px solid #333;
+    border-radius: 14px;
+    padding: 14px;
+}
+
+.top {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    align-items: flex-start;
+}
+
+.title {
+    margin: 0;
+}
+
+.sub {
+    opacity: .85;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.dot {
+    opacity: .6;
+}
+
+.price {
+    font-weight: 800;
+    font-size: 20px;
+}
+
+.meta {
+    margin-top: 10px;
+    display: grid;
+    gap: 4px;
+    opacity: .9;
+}
+
+.section {
+    margin-top: 14px;
+}
+
+.section h3 {
+    margin: 0 0 6px 0;
+}
+
+.chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.chip {
+    border: 1px solid #444;
+    padding: 5px 10px;
+    border-radius: 999px;
+    font-size: 13px;
+}
+
+.mono {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    opacity: .9;
+}
+
+.hint {
+    margin-top: 10px;
+    opacity: .75;
+}

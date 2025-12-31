@@ -1,11 +1,48 @@
-<h2>Catálogo</h2>
+<div class="page">
+    <header class="header">
+        <h2>Catálogo</h2>
+        <button class="btn" (click)="cargar()">Refrescar</button>
+    </header>
 
-<section style="margin-top:16px;">
-    <h3>Categorías</h3>
-    <pre>{{ categorias() | json }}</pre>
-</section>
+    <p class="hint" *ngIf="videojuegosResp()">
+        {{ videojuegosResp()!.mensaje }} (Total: {{ videojuegosResp()!.total }})
+    </p>
 
-<section style="margin-top:16px;">
-    <h3>Videojuegos</h3>
-    <pre>{{ videojuegos() | json }}</pre>
-</section>
+    <p class="error" *ngIf="error()">{{ error() }}</p>
+    <p class="loading" *ngIf="cargando()">Cargando...</p>
+
+    <section class="categorias" *ngIf="categorias().length">
+        <button class="chip" [class.active]="categoriaSeleccionadaId() === 'todas'"
+            (click)="seleccionarCategoria('todas')">
+            Todas
+        </button>
+
+        <button class="chip" *ngFor="let c of categorias()" [class.active]="categoriaSeleccionadaId() === c.idCategoria"
+            (click)="seleccionarCategoria(c.idCategoria)" [title]="c.descripcion">
+            {{ c.nombre }}
+        </button>
+    </section>
+
+    <section class="grid" *ngIf="videojuegosFiltrados().length">
+        <a class="card" *ngFor="let v of videojuegosFiltrados()" [routerLink]="['/videojuego', v.idVideojuego]">
+            <div class="card-top">
+                <div class="title">{{ v.titulo }}</div>
+                <div class="price">Q{{ v.precio }}</div>
+            </div>
+
+            <div class="meta">
+                <div><b>Empresa:</b> {{ v.empresa }}</div>
+                <div><b>Clasificación:</b> {{ v.clasificacion }} ({{ v.edadMinima }}+)</div>
+                <div><b>Rating:</b> {{ v.calificacionPromedio }}</div>
+            </div>
+
+            <div class="img-hint">
+                Portada: {{ v.imagenPortada }}
+            </div>
+        </a>
+    </section>
+
+    <p *ngIf="videojuegosResp() && videojuegosFiltrados().length === 0">
+        No hay videojuegos para mostrar.
+    </p>
+</div>

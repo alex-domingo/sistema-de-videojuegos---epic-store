@@ -1,1 +1,53 @@
-<p>videojuego-detalle works!</p>
+<div class="page">
+    <a routerLink="/" class="back">← Volver al catálogo</a>
+
+    <p *ngIf="cargando()">Cargando...</p>
+    <p class="error" *ngIf="error()">{{ error() }}</p>
+
+    <section *ngIf="juego() as v" class="card">
+        <header class="top">
+            <div>
+                <h2 class="title">{{ v.titulo }}</h2>
+                <div class="sub">
+                    <span><b>Empresa:</b> {{ v.empresa }}</span>
+                    <span class="dot">•</span>
+                    <span><b>Lanzamiento:</b> {{ v.fechaLanzamiento }}</span>
+                </div>
+            </div>
+
+            <div class="price">
+                Q{{ v.precio }}
+            </div>
+        </header>
+
+        <div class="meta">
+            <div><b>Clasificación:</b> {{ v.clasificacion }} ({{ v.edadMinima }}+)</div>
+            <div><b>Calificación promedio:</b> {{ v.calificacionPromedio }}</div>
+        </div>
+
+        <div class="section">
+            <h3>Descripción</h3>
+            <p>{{ v.descripcion }}</p>
+        </div>
+
+        <div class="section">
+            <h3>Requisitos mínimos</h3>
+            <p class="mono">{{ v.requisitosMinimos }}</p>
+        </div>
+
+        <div class="section" *ngIf="v.categorias.length">
+            <h3>Categorías</h3>
+            <div class="chips">
+                <span class="chip" *ngFor="let c of v.categorias">{{ c }}</span>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>Portada</h3>
+            <p class="mono">{{ v.imagenPortada }}</p>
+            <!-- aquí vamos a poder cambiar a <img> si la ruta es absoluta o mapeable -->
+        </div>
+    </section>
+
+    <p class="hint" *ngIf="resp()">{{ resp()!.mensaje }}</p>
+</div>

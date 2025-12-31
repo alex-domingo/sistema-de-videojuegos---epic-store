@@ -1,0 +1,96 @@
+.page {
+    padding: 16px;
+    font-family: Arial, sans-serif;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.btn {
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+.hint {
+    opacity: .8;
+    margin-top: 4px;
+}
+
+.error {
+    color: #ff6b6b;
+}
+
+.loading {
+    opacity: .8;
+}
+
+.categorias {
+    margin: 12px 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.chip {
+    padding: 6px 10px;
+    border-radius: 999px;
+    border: 1px solid #444;
+    background: transparent;
+    cursor: pointer;
+}
+
+.chip.active {
+    border-color: #aaa;
+}
+
+.grid {
+    margin-top: 12px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 12px;
+}
+
+.card {
+    display: block;
+    border: 1px solid #333;
+    border-radius: 12px;
+    padding: 12px;
+    text-decoration: none;
+    color: inherit;
+}
+
+.card:hover {
+    border-color: #666;
+}
+
+.card-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.title {
+    font-weight: 700;
+}
+
+.price {
+    font-weight: 700;
+}
+
+.meta {
+    margin-top: 10px;
+    font-size: 14px;
+    opacity: .9;
+    display: grid;
+    gap: 4px;
+}
+
+.img-hint {
+    margin-top: 10px;
+    font-size: 12px;
+    opacity: .7;
+}
