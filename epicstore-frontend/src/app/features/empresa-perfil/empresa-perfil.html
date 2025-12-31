@@ -1,0 +1,47 @@
+<div class="page">
+    <a routerLink="/" class="back">← Volver al catálogo</a>
+
+    <p *ngIf="cargando()">Cargando...</p>
+    <p class="error" *ngIf="error()">{{ error() }}</p>
+
+    <section *ngIf="empresa() as e" class="card">
+        <header class="top">
+            <div>
+                <h2 class="title">{{ e.nombre }}</h2>
+                <p class="desc">{{ e.descripcion }}</p>
+            </div>
+
+            <div class="badge" [class.off]="e.comentariosVisiblesGlobal !== 'S'">
+                Comentarios globales: {{ e.comentariosVisiblesGlobal === 'S' ? 'Visibles' : 'Ocultos' }}
+            </div>
+        </header>
+
+        <h3 class="subtitle">Catálogo de la empresa</h3>
+
+        <div class="grid" *ngIf="catalogo().length">
+            <a class="game" *ngFor="let v of catalogo()" [routerLink]="['/videojuego', v.idVideojuego]">
+                <div class="game-top">
+                    <div class="game-title">{{ v.titulo }}</div>
+                    <div class="game-price">Q{{ v.precio }}</div>
+                </div>
+
+                <div class="game-meta">
+                    <div>
+                        <b>Venta:</b>
+                        <span [class.off]="v.ventaActiva !== 'S'">
+                            {{ v.ventaActiva === 'S' ? 'Activa' : 'Inactiva' }}
+                        </span>
+                    </div>
+
+                    <div *ngIf="v.calificacionPromedio !== undefined">
+                        <b>Rating:</b> {{ v.calificacionPromedio }}
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <p *ngIf="catalogo().length === 0" class="hint">
+            Esta empresa aún no tiene videojuegos para mostrar.
+        </p>
+    </section>
+</div>
