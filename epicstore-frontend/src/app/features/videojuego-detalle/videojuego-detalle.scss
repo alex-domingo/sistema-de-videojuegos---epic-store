@@ -83,3 +83,14 @@
     margin-top: 10px;
     opacity: .75;
 }
+
+.empresa-link {
+    display: inline-block;
+    margin-top: 4px;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.empresa-link:hover {
+    text-decoration: underline;
+}
