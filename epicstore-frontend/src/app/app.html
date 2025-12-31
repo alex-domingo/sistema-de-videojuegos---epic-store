@@ -22,6 +22,8 @@
                         <span class="badge">{{ state.badgeText() }}</span>
                     </span>
                 </ng-container>
+                <a class="btn-link" *ngIf="state.esUsuario()" routerLink="/biblioteca">Mi biblioteca</a>
+
 
                 <!-- Empresa -->
                 <ng-container *ngIf="state.esEmpresa()">
