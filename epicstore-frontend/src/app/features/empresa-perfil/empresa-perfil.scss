@@ -1,0 +1,102 @@
+.page {
+    padding: 16px;
+    font-family: Arial, sans-serif;
+}
+
+.back {
+    display: inline-block;
+    margin-bottom: 12px;
+    text-decoration: none;
+}
+
+.error {
+    color: #ff6b6b;
+}
+
+.card {
+    border: 1px solid #333;
+    border-radius: 14px;
+    padding: 14px;
+}
+
+.top {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    align-items: flex-start;
+}
+
+.title {
+    margin: 0;
+}
+
+.desc {
+    margin: 8px 0 0 0;
+    opacity: .9;
+    max-width: 700px;
+}
+
+.badge {
+    border: 1px solid #444;
+    padding: 8px 10px;
+    border-radius: 999px;
+    font-size: 13px;
+    white-space: nowrap;
+}
+
+.badge.off {
+    opacity: .7;
+}
+
+.subtitle {
+    margin: 16px 0 8px 0;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 12px;
+}
+
+.game {
+    display: block;
+    border: 1px solid #333;
+    border-radius: 12px;
+    padding: 12px;
+    text-decoration: none;
+    color: inherit;
+}
+
+.game:hover {
+    border-color: #666;
+}
+
+.game-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.game-title {
+    font-weight: 700;
+}
+
+.game-price {
+    font-weight: 700;
+}
+
+.game-meta {
+    margin-top: 10px;
+    display: grid;
+    gap: 4px;
+    font-size: 14px;
+    opacity: .9;
+}
+
+.off {
+    opacity: .7;
+}
+
+.hint {
+    opacity: .8;
+}
