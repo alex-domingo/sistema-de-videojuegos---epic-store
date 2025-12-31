@@ -4,15 +4,26 @@ import { VideojuegoDetalle } from './features/videojuego-detalle/videojuego-deta
 import { EmpresaPerfil } from './features/empresa-perfil/empresa-perfil';
 import { Login } from './features/auth/login/login';
 import { LoginEmpresa } from './features/auth/login-empresa/login-empresa';
+import { Forbidden } from './features/auth/forbidden/forbidden';
+import { usuarioGuard } from './core/guards/usuario.guard';
+import { empresaGuard } from './core/guards/empresa.guard';
+import { adminGuard } from './core/guards/admin.guard';
+
 
 export const routes: Routes = [
+    // públicas
     { path: '', component: Catalogo },
     { path: 'videojuego/:id', component: VideojuegoDetalle },
     { path: 'empresa/:id', component: EmpresaPerfil },
-
     { path: 'login', component: Login },
     { path: 'login-empresa', component: LoginEmpresa },
+    { path: 'forbidden', component: Forbidden },
+
+    // protegidas (placeholder por ahora)
+    // ejemplo:
+    // { path: 'mi-biblioteca', component: MiBiblioteca, canActivate: [usuarioGuard] },
+    // { path: 'empresa/dashboard', component: EmpresaDashboard, canActivate: [empresaGuard] },
+    // { path: 'admin', component: AdminHome, canActivate: [adminGuard] },
 
     { path: '**', redirectTo: '' }
 ];
-
