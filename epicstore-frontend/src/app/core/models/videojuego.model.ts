@@ -11,11 +11,12 @@ export interface VideojuegoListadoItem {
 
 export interface VideojuegoDetalle {
     idVideojuego: number;
+    idEmpresa: number; // nuevo
     titulo: string;
     descripcion: string;
     precio: number;
     requisitosMinimos: string;
-    fechaLanzamiento: string; // viene como "YYYY-MM-DD"
+    fechaLanzamiento: string;
     imagenPortada: string;
     empresa: string;
     clasificacion: string;
@@ -23,4 +24,3 @@ export interface VideojuegoDetalle {
     categorias: string[];
     calificacionPromedio: number;
 }
-
