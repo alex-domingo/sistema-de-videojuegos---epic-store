@@ -8,6 +8,7 @@ import { Forbidden } from './features/auth/forbidden/forbidden';
 import { usuarioGuard } from './core/guards/usuario.guard';
 import { empresaGuard } from './core/guards/empresa.guard';
 import { adminGuard } from './core/guards/admin.guard';
+import { Biblioteca } from './features/biblioteca/biblioteca';
 
 
 export const routes: Routes = [
@@ -21,7 +22,7 @@ export const routes: Routes = [
 
     // protegidas (placeholder por ahora)
     // ejemplo:
-    // { path: 'mi-biblioteca', component: MiBiblioteca, canActivate: [usuarioGuard] },
+    { path: 'biblioteca', component: Biblioteca, canActivate: [usuarioGuard] },
     // { path: 'empresa/dashboard', component: EmpresaDashboard, canActivate: [empresaGuard] },
     // { path: 'admin', component: AdminHome, canActivate: [adminGuard] },
 
