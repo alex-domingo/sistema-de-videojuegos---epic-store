@@ -1,149 +1,185 @@
-.page {
-    padding: 16px;
-    font-family: Arial, sans-serif;
+:host {
+    display: block;
 }
 
 .back {
-    display: inline-block;
+    display: inline-flex;
     margin-bottom: 12px;
-    text-decoration: none;
-}
+    padding: 10px 12px;
+    border-radius: 12px;
+    border: 1px solid rgba(160, 190, 255, 0.18);
+    background: rgba(9, 12, 22, 0.45);
 
-.error {
-    color: #ff6b6b;
+    &:hover {
+        border-color: rgba(89, 212, 255, 0.55);
+        box-shadow: var(--glow);
+    }
 }
 
 .card {
-    border: 1px solid #333;
-    border-radius: 14px;
-    padding: 14px;
+    padding: 16px;
+    border-radius: 18px;
+    margin-bottom: 14px;
 }
 
 .top {
     display: flex;
     justify-content: space-between;
-    gap: 12px;
+    gap: 14px;
     align-items: flex-start;
 }
 
 .title {
     margin: 0;
+    font-weight: 900;
+    letter-spacing: 0.35px;
 }
 
 .sub {
-    opacity: .85;
+    margin-top: 8px;
     display: flex;
-    gap: 8px;
     flex-wrap: wrap;
+    gap: 8px;
+    color: rgba(240, 246, 255, 0.72);
 }
 
 .dot {
-    opacity: .6;
+    opacity: 0.5;
 }
 
 .price {
-    font-weight: 800;
-    font-size: 20px;
+    font-weight: 950;
+    font-size: 22px;
+    color: rgba(89, 212, 255, 0.95);
+    text-shadow: 0 0 18px rgba(89, 212, 255, 0.25);
 }
 
 .meta {
-    margin-top: 10px;
+    margin-top: 12px;
     display: grid;
-    gap: 4px;
-    opacity: .9;
+    gap: 6px;
+    color: rgba(240, 246, 255, 0.78);
 }
 
 .section {
-    margin-top: 14px;
+    margin-top: 16px;
+
+    h3 {
+        margin: 0 0 8px 0;
+        font-weight: 850;
+    }
+
+    p {
+        margin: 0;
+        color: rgba(240, 246, 255, 0.74);
+        line-height: 1.45;
+    }
 }
 
-.section h3 {
-    margin: 0 0 6px 0;
+.mono {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    padding: 10px 12px;
+    border-radius: 14px;
+    border: 1px solid rgba(160, 190, 255, 0.14);
+    background: rgba(9, 12, 22, 0.55);
 }
 
 .chips {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 10px;
 }
 
 .chip {
-    border: 1px solid #444;
-    padding: 5px 10px;
+    border: 1px solid rgba(160, 190, 255, 0.18);
+    padding: 7px 12px;
     border-radius: 999px;
     font-size: 13px;
-}
-
-.mono {
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-    opacity: .9;
-}
-
-.hint {
-    margin-top: 10px;
-    opacity: .75;
+    background: rgba(9, 12, 22, 0.45);
 }
 
 .empresa-link {
-    display: inline-block;
-    margin-top: 4px;
-    text-decoration: none;
-    font-weight: 700;
-}
+    font-weight: 800;
+    color: rgba(89, 212, 255, 0.95);
 
-.empresa-link:hover {
-    text-decoration: underline;
+    &:hover {
+        text-decoration: underline;
+    }
 }
 
 .label {
     display: grid;
-    gap: 6px;
-    max-width: 320px;
+    gap: 8px;
+    max-width: 340px;
 }
 
 .btn {
+    margin-top: 12px;
+    width: fit-content;
+}
+
+.btn-link {
     margin-top: 10px;
-    padding: 7px 10px;
-    cursor: pointer;
 }
 
-.ok {
-    color: #7CFC98;
-    opacity: .9;
+.thread {
+    margin-top: 14px;
+    display: grid;
+    gap: 12px;
 }
 
-.muted {
-    opacity: .75;
+.comment {
+    padding: 12px;
+    border-radius: 16px;
+    border: 1px solid rgba(160, 190, 255, 0.14);
+    background: rgba(9, 12, 22, 0.45);
+}
+
+.reply {
+    margin-left: 16px;
+    border-left: 2px solid rgba(89, 212, 255, 0.25);
 }
 
 .head {
     display: flex;
+    gap: 10px;
     align-items: center;
-    gap: 8px;
-    /* Espacio entre elementos */
-    margin-bottom: 8px;
     flex-wrap: wrap;
-    /* Para que se ajuste en pantallas pequeñas */
+    margin-bottom: 8px;
+
+    .badge {
+        color: rgba(240, 246, 255, 0.72);
+    }
 }
 
-.head b {
-    font-weight: 600;
+.form {
+    margin-top: 12px;
+    display: grid;
+    gap: 10px;
+    max-width: 650px;
+
+    textarea {
+        resize: vertical;
+        min-height: 84px;
+    }
+
+    button {
+        width: fit-content;
+    }
 }
 
-.head .muted {
-    color: #666;
-    font-size: 0.9em;
+.ok {
+    margin-top: 10px;
+    background: rgba(57, 242, 182, 0.08);
+    border: 1px solid rgba(57, 242, 182, 0.25);
+    padding: 10px 12px;
+    border-radius: 14px;
 }
 
-.head .badge {
-    background-color: #f0f0f0;
-    border: 1px solid #ddd;
-    border-radius: 12px;
-    padding: 2px 8px;
-    font-size: 0.85em;
-    font-weight: 500;
-}
-
-.head>*:not(:last-child) {
-    margin-right: 8px;
+.error {
+    margin-top: 10px;
+    background: rgba(255, 77, 109, 0.08);
+    border: 1px solid rgba(255, 77, 109, 0.25);
+    padding: 10px 12px;
+    border-radius: 14px;
 }
