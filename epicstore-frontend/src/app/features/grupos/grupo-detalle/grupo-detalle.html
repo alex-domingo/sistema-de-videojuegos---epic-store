@@ -1,0 +1,40 @@
+<header class="header">
+    <h2>Grupo #{{ idGrupo() }}</h2>
+    <a routerLink="/grupos" class="back">← Volver</a>
+</header>
+
+<p *ngIf="cargando()">Cargando...</p>
+<p class="error" *ngIf="error()">{{ error() }}</p>
+<p class="ok" *ngIf="ok()">{{ ok() }}</p>
+
+<section class="card">
+    <h3>Miembros</h3>
+
+    <p class="muted" *ngIf="!cargando() && miembros().length === 0">
+        No hay miembros.
+    </p>
+
+    <ul class="ul" *ngIf="miembros().length">
+        <li *ngFor="let m of miembros()">
+            <b>{{ m.nickname }}</b>
+            <span class="badge">{{ m.rol }}</span>
+            <span class="muted">ID: {{ m.idUsuario }}</span>
+        </li>
+    </ul>
+</section>
+
+<section class="card">
+    <h3>Agregar miembro</h3>
+
+    <div class="row">
+        <input type="number" placeholder="ID del usuario a agregar" [ngModel]="idUsuarioNuevo()"
+            (ngModelChange)="idUsuarioNuevo.set($event); error.set(null)" />
+        <button (click)="agregarMiembro()" [disabled]="agregando()">
+            {{ agregando() ? 'Agregando...' : 'Agregar' }}
+        </button>
+    </div>
+
+    <p class="muted">
+        Nota: el backend valida dueño, límite 6, duplicado, etc.
+    </p>
+</section>
