@@ -1,0 +1,35 @@
+<h2>Grupos familiares</h2>
+
+<p *ngIf="cargando()">Cargando...</p>
+<p class="error" *ngIf="error()">{{ error() }}</p>
+<p class="ok" *ngIf="ok()">{{ ok() }}</p>
+
+<section class="card">
+    <h3>Crear grupo</h3>
+
+    <div class="row">
+        <input placeholder="Nombre del grupo" [ngModel]="nombreGrupo()"
+            (ngModelChange)="nombreGrupo.set($event); error.set(null)" />
+        <button (click)="crear()" [disabled]="creando()">
+            {{ creando() ? 'Creando...' : 'Crear' }}
+        </button>
+    </div>
+</section>
+
+<section class="card">
+    <h3>Mis grupos</h3>
+
+    <p class="muted" *ngIf="!cargando() && grupos().length === 0">
+        No tienes grupos.
+    </p>
+
+    <div class="list" *ngIf="grupos().length">
+        <a class="item" *ngFor="let g of grupos()" [routerLink]="['/grupos', g.idGrupo]">
+            <div class="title">{{ g.nombreGrupo }}</div>
+            <div class="meta">
+                <span class="badge">{{ g.rol }}</span>
+                <span class="muted">Miembros: {{ g.totalMiembros }}</span>
+            </div>
+        </a>
+    </div>
+</section>
