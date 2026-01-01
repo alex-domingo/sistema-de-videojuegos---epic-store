@@ -9,4 +9,8 @@ export class PrestamosService {
     prestar(body: CrearPrestamoRequest) {
         return this.api.post<PrestamoResponse>('/prestamos', body);
     }
+
+    devolver(body: CrearPrestamoRequest) {
+        return this.api.post<PrestamoResponse>('/prestamos/devolver', body);
+    }
 }

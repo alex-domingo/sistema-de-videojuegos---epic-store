@@ -69,4 +69,13 @@ export class ApiService {
             }
         );
     }
+    deleteWithBody<T>(path: string, body: any) {
+        return this.http.delete<T>(
+            `${API_BASE}${path}`,
+            {
+                body,
+                withCredentials: true
+            }
+        );
+    }
 }
