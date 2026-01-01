@@ -1,0 +1,79 @@
+<h2>Usuarios de empresa</h2>
+
+<p *ngIf="cargando()" class="muted">Cargando...</p>
+<p *ngIf="ok()" class="ok">{{ ok() }}</p>
+<p *ngIf="error()" class="error">{{ error() }}</p>
+
+<section class="card">
+    <h3>Crear usuario</h3>
+
+    <div class="grid">
+        <label>
+            Nombre
+            <input [ngModel]="nombre()" (ngModelChange)="nombre.set($event); error.set(null)" />
+        </label>
+
+        <label>
+            Correo
+            <input [ngModel]="correo()" (ngModelChange)="correo.set($event); error.set(null)" />
+        </label>
+
+        <label>
+            Fecha de nacimiento
+            <input type="date" [ngModel]="fechaNacimiento()"
+                (ngModelChange)="fechaNacimiento.set($event); error.set(null)" />
+        </label>
+
+        <label>
+            Password
+            <input type="password" [ngModel]="password()" (ngModelChange)="password.set($event); error.set(null)" />
+        </label>
+
+        <label>
+            Confirmar password
+            <input type="password" [ngModel]="password2()" (ngModelChange)="password2.set($event); error.set(null)" />
+        </label>
+    </div>
+
+    <button (click)="crear()" [disabled]="creando()">
+        {{ creando() ? 'Creando...' : 'Crear usuario' }}
+    </button>
+</section>
+
+<section class="card">
+    <h3>Listado</h3>
+
+    <p class="muted" *ngIf="!cargando() && usuarios().length === 0">
+        No hay usuarios registrados para esta empresa.
+    </p>
+
+    <table *ngIf="usuarios().length">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Correo</th>
+                <th>Fecha nac.</th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr *ngFor="let u of usuarios()">
+                <td>{{ u.idUsuarioEmpresa }}</td>
+                <td>{{ u.nombre }}</td>
+                <td>{{ u.correo }}</td>
+                <td>{{ u.fechaNacimiento }}</td>
+                <td class="actions">
+                    <button (click)="eliminar(u)" [disabled]="eliminandoId() === u.idUsuarioEmpresa">
+                        {{ eliminandoId() === u.idUsuarioEmpresa ? 'Eliminando...' : 'Eliminar' }}
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p class="muted">
+        Nota: el backend bloquea eliminar el último usuario de empresa.
+    </p>
+</section>

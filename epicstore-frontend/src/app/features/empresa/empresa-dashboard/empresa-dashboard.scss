@@ -1,0 +1,21 @@
+.tabs {
+    display: flex;
+    gap: 10px;
+    margin: 10px 0;
+}
+
+.tabs a {
+    padding: 6px 10px;
+    border: 1px solid #333;
+    border-radius: 999px;
+    text-decoration: none;
+    color: inherit;
+}
+
+.tabs a.active {
+    border-color: #666;
+}
+
+.content {
+    margin-top: 12px;
+}

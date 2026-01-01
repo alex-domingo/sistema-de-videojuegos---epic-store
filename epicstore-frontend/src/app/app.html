@@ -21,10 +21,10 @@
                         Hola, <b>{{ state.displayName() }}</b>
                         <span class="badge">{{ state.badgeText() }}</span>
                     </span>
+                    <a class="btn-link" routerLink="/biblioteca">Mi biblioteca</a>
+                    <a class="btn-link" routerLink="/cartera">Cartera</a>
+                    <a class="btn-link" routerLink="/grupos">Grupos</a>
                 </ng-container>
-                <a class="btn-link" *ngIf="state.esUsuario()" routerLink="/biblioteca">Mi biblioteca</a>
-                <a class="btn-link" *ngIf="state.esUsuario()" routerLink="/cartera">Cartera</a>
-                <a class="btn-link" *ngIf="state.esUsuario()" routerLink="/grupos">Grupos</a>
 
                 <!-- Empresa -->
                 <ng-container *ngIf="state.esEmpresa()">
@@ -32,6 +32,7 @@
                         Hola, <b>{{ state.displayName() }}</b>
                         <span class="badge">{{ state.badgeText() }}</span>
                     </span>
+                    <a class="btn-link" routerLink="/empresa">Panel Empresa</a>
                 </ng-container>
 
                 <button class="btn" (click)="logout()" [disabled]="cerrando()">
