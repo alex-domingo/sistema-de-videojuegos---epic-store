@@ -1,6 +1,5 @@
-.page {
-    padding: 16px;
-    font-family: Arial, sans-serif;
+:host {
+    display: block;
 }
 
 .header {
@@ -8,83 +7,75 @@
     justify-content: space-between;
     align-items: baseline;
     gap: 12px;
+
+    h2 {
+        margin: 0;
+        font-weight: 900;
+    }
 }
 
 .back {
-    text-decoration: none;
-    opacity: .9;
-}
+    display: inline-flex;
+    padding: 10px 12px;
+    border-radius: 12px;
+    border: 1px solid rgba(160, 190, 255, 0.18);
+    background: rgba(9, 12, 22, 0.45);
 
-.back:hover {
-    opacity: 1;
+    &:hover {
+        border-color: rgba(89, 212, 255, 0.55);
+        box-shadow: var(--glow);
+    }
 }
 
 .card {
-    border: 1px solid #333;
-    border-radius: 14px;
-    padding: 14px;
-    margin-top: 12px;
-}
-
-.error {
-    color: #ff6b6b;
-}
-
-.ok {
-    color: #7CFC98;
-    opacity: .9;
-}
-
-.muted {
-    opacity: .75;
+    margin-top: 14px;
+    padding: 16px;
+    border-radius: 18px;
 }
 
 .saldo {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
+    padding: 12px;
+    border-radius: 16px;
+    border: 1px solid rgba(160, 190, 255, 0.14);
+    background: rgba(9, 12, 22, 0.45);
 }
 
 .label {
-    opacity: .8;
+    color: rgba(240, 246, 255, 0.7);
 }
 
 .value {
-    font-weight: 900;
-    font-size: 22px;
+    font-weight: 950;
+    font-size: 26px;
+    color: rgba(89, 212, 255, 0.95);
+    text-shadow: 0 0 18px rgba(89, 212, 255, 0.18);
 }
 
 .form {
+    margin-top: 12px;
     display: grid;
-    gap: 8px;
-    max-width: 420px;
-    margin-top: 10px;
-}
+    gap: 10px;
+    max-width: 520px;
 
-input {
-    padding: 8px;
-    border-radius: 10px;
-    border: 1px solid #444;
-}
-
-.btn {
-    padding: 8px 10px;
-    cursor: pointer;
+    .btn {
+        width: fit-content;
+    }
 }
 
 .table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
-}
+    margin-top: 12px;
+    overflow: hidden;
+    border-radius: 14px;
+    border: 1px solid rgba(160, 190, 255, 0.14);
 
-th,
-td {
-    border-bottom: 1px solid #333;
-    padding: 8px;
-    text-align: left;
-}
+    thead th {
+        background: rgba(9, 12, 22, 0.55);
+    }
 
-th {
-    opacity: .85;
+    tbody td {
+        color: rgba(240, 246, 255, 0.78);
+    }
 }
