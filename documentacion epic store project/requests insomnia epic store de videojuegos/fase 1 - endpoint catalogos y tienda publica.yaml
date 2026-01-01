@@ -1,0 +1,114 @@
+type: collection.insomnia.rest/5.0
+schema_version: "5.1"
+name: fase 1 - endpoint catalogos y tienda publica
+meta:
+  id: wrk_562eda4f2521429f9af6f5ae853b208f
+  created: 1766708795539
+  modified: 1766722078798
+  description: ""
+collection:
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/categorias
+    name: listamos categoria de los videojuegos
+    meta:
+      id: req_0c24cca1ae064786b1bd976db166343d
+      created: 1766710513338
+      modified: 1766723664304
+      isPrivate: false
+      description: ""
+      sortKey: -1766710513338
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/videojuegos
+    name: mostramos listado de tienda publica
+    meta:
+      id: req_47abd8ec6c924ea1a430f2e0f66a7086
+      created: 1766718608818
+      modified: 1766718659388
+      isPrivate: false
+      description: ""
+      sortKey: -1766718608818
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/videojuegos?id=1
+    name: mostramos detalle del videojuego
+    meta:
+      id: req_25580c9f6ebf4785a08854bd01eae24e
+      created: 1766718852048
+      modified: 1767175073344
+      isPrivate: false
+      description: ""
+      sortKey: -1766718852048
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/videojuegos?id=999
+    name: tratamos de mostrar detalles de un videojuego inexistente
+    meta:
+      id: req_b7bf47dc2910456caa8c0dc34ebaa51c
+      created: 1766719707244
+      modified: 1766719720513
+      isPrivate: false
+      description: ""
+      sortKey: -1766718852148
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_a1b5140e7032cf2e3d24ba33b4d729334ab30a3a
+    created: 1766708795563
+    modified: 1766708795563
+environments:
+  name: Base Environment
+  meta:
+    id: env_a1b5140e7032cf2e3d24ba33b4d729334ab30a3a
+    created: 1766708795550
+    modified: 1766708795550
+    isPrivate: false

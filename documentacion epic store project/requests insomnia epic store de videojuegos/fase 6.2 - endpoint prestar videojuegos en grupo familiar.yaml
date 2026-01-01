@@ -1,0 +1,290 @@
+type: collection.insomnia.rest/5.0
+schema_version: "5.1"
+name: fase 6.2 - endpoint prestar videojuegos en grupo familiar
+meta:
+  id: wrk_e2c82468cb57479982b68b924c660e5f
+  created: 1766376991128
+  modified: 1766741734402
+  description: ""
+collection:
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/prestamos
+    name: realizar un prestamo correctamente
+    meta:
+      id: req_80bd49b89bc243578635e66e9bc3f7ee
+      created: 1766377001158
+      modified: 1767222475720
+      isPrivate: false
+      description: ""
+      sortKey: -1766377001158
+    method: POST
+    body:
+      mimeType: application/json
+      text: |
+        {
+          "idGrupo": 5,
+          "idDueno": 96,
+          "idReceptor": 88,
+          "idVideojuego": 8
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/prestamos
+    name: receptor ya tiene el juego
+    meta:
+      id: req_011c1a21be114d498739236962d843f6
+      created: 1766377242862
+      modified: 1766737011008
+      isPrivate: false
+      description: ""
+      sortKey: -1766377001192.375
+    method: POST
+    body:
+      mimeType: application/json
+      text: |
+        {
+          "idGrupo": 2,
+          "idDueno": 77,
+          "idReceptor": 88,
+          "idVideojuego": 2
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/biblioteca?idUsuario=88
+    name: verificamos prestamo correctamente
+    meta:
+      id: req_94c3b501d2dc47d0983e619de576b4ef
+      created: 1766377260781
+      modified: 1766736951841
+      isPrivate: false
+      description: ""
+      sortKey: -1766377001170.5
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/prestamos
+    name: dueño no lo tiene como PROPIO o no lo POSEE
+    meta:
+      id: req_394dc27517fe4ce4925bd1f5d8b33fc9
+      created: 1766379512623
+      modified: 1766737039074
+      isPrivate: false
+      description: ""
+      sortKey: -1766377001214.25
+    method: POST
+    body:
+      mimeType: application/json
+      text: |
+        {
+          "idGrupo": 2,
+          "idDueno": 77,
+          "idReceptor": 88,
+          "idVideojuego": 1
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/prestamos
+    name: receptor no es miembro del grupo familiar
+    meta:
+      id: req_d80237bbf36643889fed0541511379bf
+      created: 1766380041711
+      modified: 1766737164118
+      isPrivate: false
+      description: ""
+      sortKey: -1766377001458
+    method: POST
+    body:
+      mimeType: application/json
+      text: |
+        {
+          "idGrupo": 2,
+          "idDueno": 77,
+          "idReceptor": 6,
+          "idVideojuego": 2
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/prestamos/devolver
+    name: devolver correctamente un videojuego
+    meta:
+      id: req_14a46cfa90624464b4a57706be5ee22b
+      created: 1766470959869
+      modified: 1766737192444
+      isPrivate: false
+      description: ""
+      sortKey: -1766470959869
+    method: POST
+    body:
+      mimeType: application/json
+      text: |
+        {
+          "idGrupo": 2,
+          "idDueno": 77,
+          "idReceptor": 88,
+          "idVideojuego": 2
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/prestamos
+    name: el receptor no existe
+    meta:
+      id: req_a78f119be74d42219ed5ac2ecb39c66c
+      created: 1766737130359
+      modified: 1767256807283
+      isPrivate: false
+      description: ""
+      sortKey: -1766423980663.5
+    method: POST
+    body:
+      mimeType: application/json
+      text: |
+        {
+          "idGrupo": 2,
+          "idDueno": 77,
+          "idReceptor": 777,
+          "idVideojuego": 2
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/auth/login
+    name: login USUARIO COMUN
+    meta:
+      id: req_0014a84770a540398a8b25d11aa0a0aa
+      created: 1767222383681
+      modified: 1767222423217
+      isPrivate: false
+      description: ""
+      sortKey: -1766377001058
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+          "login": "prueba6",
+          "password": "prueba123"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_21e5982e4b5a3dd3eb968bb65a6c1fae6859a62b
+    created: 1766376991149
+    modified: 1767256799041
+  cookies:
+    - id: d489156e-5868-498d-ad8e-d6a8da21f90c
+      key: JSESSIONID
+      value: 01F5719E4224EE5523DE282C7C877894
+      domain: localhost
+      path: /EpicStore-1.0-SNAPSHOT
+      secure: false
+      httpOnly: true
+      hostOnly: true
+environments:
+  name: Base Environment
+  meta:
+    id: env_21e5982e4b5a3dd3eb968bb65a6c1fae6859a62b
+    created: 1766376991139
+    modified: 1766376991139
+    isPrivate: false

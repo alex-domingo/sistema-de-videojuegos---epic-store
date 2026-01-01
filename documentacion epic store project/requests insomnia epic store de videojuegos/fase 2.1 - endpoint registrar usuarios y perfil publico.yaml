@@ -1,0 +1,182 @@
+type: collection.insomnia.rest/5.0
+schema_version: "5.1"
+name: fase 2.1 - endpoint registrar usuarios y perfil publico
+meta:
+  id: wrk_9e3e31705c0a45988f492d41ed3514ca
+  created: 1766776638071
+  modified: 1766777084713
+  description: ""
+collection:
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/usuarios/registro
+    name: creamos un nuevo usuario correctamente
+    meta:
+      id: req_d4af062f6355470fad31acd2d4ff1b61
+      created: 1766776643263
+      modified: 1767216141081
+      isPrivate: false
+      description: ""
+      sortKey: -1766776643263
+    method: POST
+    body:
+      mimeType: application/json
+      text: |
+        {
+          "nickname": "angular",
+          "password": "angular123",
+          "fechaNacimiento": "2000-07-09",
+          "correo": "angular6@gmail.com",
+          "telefono": "+502 3731-0077",
+          "pais": "Guatemala",
+          "avatar": "avatar_angular.png",
+          "bibliotecaPublica": true
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/perfiles/usuario?nickname=ludvin
+    name: perfil publico de usuario
+    meta:
+      id: req_40f849dc14bc43928a41307d7c48267e
+      created: 1766778279639
+      modified: 1766782258374
+      isPrivate: false
+      description: ""
+      sortKey: -1766778279839
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/usuarios/registro
+    name: intentamos crear un nuevo usuario con el mismo correo
+    meta:
+      id: req_043ac24b85834394841d01275b0a9817
+      created: 1766779604832
+      modified: 1766779657991
+      isPrivate: false
+      description: ""
+      sortKey: -1766777461451
+    method: POST
+    body:
+      mimeType: application/json
+      text: |
+        {
+          "nickname": "mohamed",
+          "password": "moha123",
+          "fechaNacimiento": "2000-07-09",
+          "correo": "nova@gmail.com",
+          "telefono": "+502 5555-1234",
+          "pais": "Guatemala",
+          "avatar": "avatar_nova.png",
+          "bibliotecaPublica": true
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/usuarios/registro
+    name: intentamos crear un nuevo usuario con un nickname existente
+    meta:
+      id: req_7d29c702172e4197b54d50dcc7d56fb9
+      created: 1766779698384
+      modified: 1766779778903
+      isPrivate: false
+      description: ""
+      sortKey: -1766777870545
+    method: POST
+    body:
+      mimeType: application/json
+      text: |
+        {
+          "nickname": "nova",
+          "password": "nova123",
+          "fechaNacimiento": "2000-07-09",
+          "correo": "novados@gmail.com",
+          "telefono": "+502 5555-1234",
+          "pais": "Guatemala",
+          "avatar": "avatar_nova.png",
+          "bibliotecaPublica": true
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/usuarios/buscar?nickname=al
+    name: tratamos de buscar usuarios por lista
+    meta:
+      id: req_c93c9574c2494e42b55a1ad2ec66a2e9
+      created: 1766782222547
+      modified: 1766782240124
+      isPrivate: false
+      description: ""
+      sortKey: -1766778279739
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_5b3bc28df49c5afe2949ad5e80a1ebebdb4f611c
+    created: 1766776638080
+    modified: 1766776638080
+environments:
+  name: Base Environment
+  meta:
+    id: env_5b3bc28df49c5afe2949ad5e80a1ebebdb4f611c
+    created: 1766776638076
+    modified: 1766776638076
+    isPrivate: false

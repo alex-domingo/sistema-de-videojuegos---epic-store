@@ -1,0 +1,173 @@
+type: collection.insomnia.rest/5.0
+schema_version: "5.1"
+name: fase 2 - endpoint autenticacion y roles
+meta:
+  id: wrk_f97700ec6dab4fcaa43c26b376954b3b
+  created: 1766252388410
+  modified: 1766741609539
+  description: ""
+collection:
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/auth/login
+    name: login de usuario COMUN o ADMIN
+    meta:
+      id: req_601a39c06d424dd7bc96de5a0e72c739
+      created: 1766253033577
+      modified: 1766733028138
+      isPrivate: false
+      description: ""
+      sortKey: -1766253033577
+    method: POST
+    body:
+      mimeType: application/json
+      text: |
+        {
+          "login": "alex",
+          "password": "alex123"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/auth/me
+    name: vemos quien esta logueado (sesion activa)
+    meta:
+      id: req_16b9eb4786ea486ab1b214d95c65a3ef
+      created: 1766253123624
+      modified: 1766733072949
+      isPrivate: false
+      description: ""
+      sortKey: -1766267095565
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/auth/logout
+    name: probar logout
+    meta:
+      id: req_e5b4e45cb0374a2fa612d02a0b2154a6
+      created: 1766281157553
+      modified: 1766558115403
+      isPrivate: false
+      description: ""
+      sortKey: -1766281157553
+    method: POST
+    headers:
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/auth/login
+    name: prueba credenciales invalidas
+    meta:
+      id: req_52e7cc0f1b3047a387e00de689acd52e
+      created: 1766281241048
+      modified: 1766281726661
+      isPrivate: false
+      description: ""
+      sortKey: -1766281241048
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+          "login": "alex",
+          "password": "alex1234"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/auth/login-empresa
+    name: login de usuario empresa
+    meta:
+      id: req_a517d1ab861f4479b630449e8ad76082
+      created: 1766281390235
+      modified: 1766619283390
+      isPrivate: false
+      description: ""
+      sortKey: -1766281390235
+    method: POST
+    body:
+      mimeType: application/json
+      text: |
+        {
+          "correo": "luis@nebulagames.com",
+          "password": "luis123"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_d67711ed38da4ad00dd883212577017c62ddb7d8
+    created: 1766252388422
+    modified: 1767178365979
+  cookies:
+    - id: f777c7b4-b583-4ac9-93b2-73537a79cc66
+      key: JSESSIONID
+      value: 371E790D9DDBCA73AF11663C19D1352D
+      domain: localhost
+      path: /EpicStore-1.0-SNAPSHOT
+      secure: false
+      httpOnly: true
+      hostOnly: true
+environments:
+  name: Base Environment
+  meta:
+    id: env_d67711ed38da4ad00dd883212577017c62ddb7d8
+    created: 1766252388415
+    modified: 1766252388415
+    isPrivate: false

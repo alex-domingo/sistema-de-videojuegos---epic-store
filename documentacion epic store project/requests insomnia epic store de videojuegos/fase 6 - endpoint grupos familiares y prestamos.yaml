@@ -1,0 +1,95 @@
+type: collection.insomnia.rest/5.0
+schema_version: "5.1"
+name: fase 6 - endpoint grupos familiares y prestamos
+meta:
+  id: wrk_137c10634dfc4cdab2233a821a097f29
+  created: 1766290128294
+  modified: 1766741685043
+  description: ""
+collection:
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/grupos
+    name: endpoint creacion de un grupo familiar
+    meta:
+      id: req_b5f2cd7eb3b04ebd84e6590fb12130d1
+      created: 1766290425093
+      modified: 1767222324240
+      isPrivate: false
+      description: ""
+      sortKey: -1766290425093
+    method: POST
+    body:
+      mimeType: application/json
+      text: |
+        {
+          "idDueno": 96,
+          "nombreGrupo": "Chill de Cojones en angular 2"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/auth/login
+    name: login USUARIO COMUN
+    meta:
+      id: req_58a8c0c3e8b846deaf750c31c461f7ed
+      created: 1767222060929
+      modified: 1767222114230
+      isPrivate: false
+      description: ""
+      sortKey: -1766290424993
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+          "login": "prueba6",
+          "password": "prueba123"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_eb036762eecac19b7eded5ce992ffde7e28f7129
+    created: 1766290128332
+    modified: 1767255634149
+  cookies:
+    - id: cf21b837-c2c2-45c4-8eb2-0ad51cd072f3
+      key: JSESSIONID
+      value: 8F1C5B01EE577B9C7C86D15CFD2D94DB
+      domain: localhost
+      path: /EpicStore-1.0-SNAPSHOT
+      secure: false
+      httpOnly: true
+      hostOnly: true
+environments:
+  name: Base Environment
+  meta:
+    id: env_eb036762eecac19b7eded5ce992ffde7e28f7129
+    created: 1766290128305
+    modified: 1766290128305
+    isPrivate: false

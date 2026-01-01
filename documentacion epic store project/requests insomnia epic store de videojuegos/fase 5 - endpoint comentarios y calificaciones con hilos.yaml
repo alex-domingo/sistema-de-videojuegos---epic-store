@@ -1,0 +1,274 @@
+type: collection.insomnia.rest/5.0
+schema_version: "5.1"
+name: fase 5 - endpoint comentarios y calificaciones con hilos
+meta:
+  id: wrk_bc5d1a7f10f64027a7448ef351be3ddb
+  created: 1766722158338
+  modified: 1766722158338
+  description: ""
+collection:
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/comentarios?idVideojuego=1
+    name: listamos comentarios de un videojuego
+    meta:
+      id: req_5b1587148cfc4b028fd84d919560bd26
+      created: 1766722170416
+      modified: 1766723683778
+      isPrivate: false
+      description: ""
+      sortKey: -1766722170416
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/comentarios
+    name: creamos comentarios en un videojuego (caso correcto)
+    meta:
+      id: req_c1169b9ae9554381a420ebc5a6010703
+      created: 1766722594532
+      modified: 1766899311228
+      isPrivate: false
+      description: ""
+      sortKey: -1766722594532
+    method: POST
+    body:
+      mimeType: application/json
+      text: |
+        {
+          "idUsuario": 96,
+          "idVideojuego": 8,
+          "calificacion": 5,
+        	"texto": "De los mejores que he jugado",
+          "idComentarioPadre": null
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/comentarios
+    name: creamos hilo comentarios en un videojuego (caso correcto)
+    meta:
+      id: req_7c15019f530c4de887891377d4c177bc
+      created: 1766723454273
+      modified: 1766723995928
+      isPrivate: false
+      description: ""
+      sortKey: -1766722594632
+    method: POST
+    body:
+      mimeType: application/json
+      text: >
+        {
+          "idUsuario": 2,
+          "idVideojuego": 1,
+          "calificacion": 5,
+          "texto": "Pienso lo mismo, a eso sumale la cálidad de los gráficos B)",
+          "idComentarioPadre": 1
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/comentarios?idVideojuego=1
+    name: verificamos que si se han creado los comentarios
+    meta:
+      id: req_078a8e8f0e334da590ce73a991adf8a0
+      created: 1766724127588
+      modified: 1766724208953
+      isPrivate: false
+      description: ""
+      sortKey: -1766724127588
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/comentarios
+    name: tratamos de comentar si el usuario no ha comprado el juego
+    meta:
+      id: req_0ab35f1df11e4121a751a4ab5a85d519
+      created: 1766724289125
+      modified: 1766724395544
+      isPrivate: false
+      description: ""
+      sortKey: -1766724127688
+    method: POST
+    body:
+      mimeType: application/json
+      text: |+
+        {
+          "idUsuario": 5,
+          "idVideojuego": 1,
+          "calificacion": 1,
+          "texto": "El juego es una mrda, no lo recomiendo",
+          "idComentarioPadre": null
+        }
+
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/comentarios
+    name: intentamos calificación invalida en videojuego
+    meta:
+      id: req_5d6892b0a7ff45239d5649f28de902d5
+      created: 1766724517858
+      modified: 1766724567488
+      isPrivate: false
+      description: ""
+      sortKey: -1766724127788
+    method: POST
+    body:
+      mimeType: application/json
+      text: |+
+        {
+          "idUsuario": 2,
+          "idVideojuego": 1,
+          "calificacion": 100,
+          "texto": "Juegazo, siempre me sorprende",
+          "idComentarioPadre": null
+        }
+
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/auth/login
+    name: login - USUARIO COMUN
+    meta:
+      id: req_802d5ab5f0fb4d3ebb99affcf68b865f
+      created: 1766898585913
+      modified: 1766899183225
+      isPrivate: false
+      description: ""
+      sortKey: -1766722170316
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+          "login": "prueba6",
+          "password": "prueba123"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/auth/logout
+    name: logout
+    meta:
+      id: req_f4a157f4ec344b929459e5bd9333550a
+      created: 1766898630255
+      modified: 1766898706545
+      isPrivate: false
+      description: ""
+      sortKey: -1766722170366
+    method: POST
+    headers:
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_f97b7ae06ae3c064cf0b0bba63e3defa8e098fd4
+    created: 1766722158365
+    modified: 1766899187284
+  cookies:
+    - id: e2874419-ced7-4adb-aa7e-9a298f90ef2f
+      key: JSESSIONID
+      value: 85461397DDDA523692AF687CF760BB05
+      domain: localhost
+      path: /EpicStore-1.0-SNAPSHOT
+      secure: false
+      httpOnly: true
+      hostOnly: true
+environments:
+  name: Base Environment
+  meta:
+    id: env_f97b7ae06ae3c064cf0b0bba63e3defa8e098fd4
+    created: 1766722158354
+    modified: 1766722158354
+    isPrivate: false

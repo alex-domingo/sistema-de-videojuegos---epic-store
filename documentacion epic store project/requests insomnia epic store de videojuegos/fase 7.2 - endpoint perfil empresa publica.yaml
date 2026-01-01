@@ -1,0 +1,45 @@
+type: collection.insomnia.rest/5.0
+schema_version: "5.1"
+name: fase 7.2 - endpoint perfil empresa publica
+meta:
+  id: wrk_792442891d52453f9d2a9ce0dc7dc678
+  created: 1766638240685
+  modified: 1766889586326
+  description: ""
+collection:
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/empresas/perfil?idEmpresa=1
+    name: mostramos perfil publico de empresa
+    meta:
+      id: req_c8abaea2ffcc4a8fbec32f4a2993e65a
+      created: 1766638245387
+      modified: 1766954725698
+      isPrivate: false
+      description: ""
+      sortKey: -1766638245387
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_d19f2a5cc70ed466af7405093b2876ef281661a1
+    created: 1766638240707
+    modified: 1766638240707
+environments:
+  name: Base Environment
+  meta:
+    id: env_d19f2a5cc70ed466af7405093b2876ef281661a1
+    created: 1766638240696
+    modified: 1766638240696
+    isPrivate: false

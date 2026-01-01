@@ -1,0 +1,251 @@
+type: collection.insomnia.rest/5.0
+schema_version: "5.1"
+name: Fase 4 - endpoint compras y biblioteca (nucleo del negocio)
+meta:
+  id: wrk_1c5f36ee06fa4d3ab6ca8987a847ac66
+  created: 1766725122510
+  modified: 1766725122510
+  description: ""
+collection:
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/compras
+    name: realizamos compra exitosa
+    meta:
+      id: req_7fa2f7858bdc47ca88bbcc43471f9059
+      created: 1766725885117
+      modified: 1766898533845
+      isPrivate: false
+      description: ""
+      sortKey: -1766725885117
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+          "idUsuario": 96,
+          "idVideojuego": 8,
+          "fechaCompra": "2025-12-25"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/compras
+    name: tratamos de volver a realizar la misma compra
+    meta:
+      id: req_7e132ac93f824cbb8839002e19d4cb86
+      created: 1766726033495
+      modified: 1766726036016
+      isPrivate: false
+      description: ""
+      sortKey: -1766725885217
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+          "idUsuario": 77,
+          "idVideojuego": 2,
+          "fechaCompra": "2025-12-18"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/compras
+    name: tratamos de comprar un videojuego sin edad permitida
+    meta:
+      id: req_328fd965b73e4fe1bd1022c47a2967b7
+      created: 1766726087965
+      modified: 1766726664744
+      isPrivate: false
+      description: ""
+      sortKey: -1766725885317
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+          "idUsuario": 5,
+          "idVideojuego": 4,
+          "fechaCompra": "2025-12-25"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/compras
+    name: tratamos de comprar un videojuego con saldo insuficiente
+    meta:
+      id: req_85dfcdce81bf44629d870273cae20ed5
+      created: 1766726606772
+      modified: 1766726730919
+      isPrivate: false
+      description: ""
+      sortKey: -1766725885367
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+          "idUsuario": 88,
+          "idVideojuego": 2,
+          "fechaCompra": "2025-12-25"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/compras
+    name: tratamos de comprar un videojuego con venta inactiva
+    meta:
+      id: req_b5a723b8549e4f3aae1ae68f923874c8
+      created: 1766726708395
+      modified: 1766726773429
+      isPrivate: false
+      description: ""
+      sortKey: -1766725885417
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+          "idUsuario": 77,
+          "idVideojuego": 7,
+          "fechaCompra": "2025-12-25"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/auth/login
+    name: login
+    meta:
+      id: req_ac2439b5d8e941aa967cdece4c2c4ef3
+      created: 1766893376166
+      modified: 1766898501452
+      isPrivate: false
+      description: ""
+      sortKey: -1766725885017
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+          "login": "prueba6",
+          "password": "prueba123"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/auth/logout
+    name: logout
+    meta:
+      id: req_6ed7734c4bb24af389b726743ce5831d
+      created: 1766893439306
+      modified: 1766893469618
+      isPrivate: false
+      description: ""
+      sortKey: -1766725885067
+    method: POST
+    headers:
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_12a35bbc10f13b1f7791f37fdf3d90537140a3a4
+    created: 1766725122532
+    modified: 1766898502903
+  cookies:
+    - id: a87a24be-626d-46cf-8f93-e6536098b167
+      key: JSESSIONID
+      value: FD700DC31B3C673C7AA90D916D8DC56D
+      domain: localhost
+      path: /EpicStore-1.0-SNAPSHOT
+      secure: false
+      httpOnly: true
+      hostOnly: true
+environments:
+  name: Base Environment
+  meta:
+    id: env_12a35bbc10f13b1f7791f37fdf3d90537140a3a4
+    created: 1766725122521
+    modified: 1766725122521
+    isPrivate: false

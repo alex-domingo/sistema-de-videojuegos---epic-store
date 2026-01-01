@@ -1,0 +1,192 @@
+type: collection.insomnia.rest/5.0
+schema_version: "5.1"
+name: fase 7.1 endpoint publicar videojuegos
+meta:
+  id: wrk_2b800a73d12542acb6d52bfccfc313ba
+  created: 1766563310479
+  modified: 1766888979366
+  description: ""
+collection:
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/auth/login-empresa
+    name: login usuario empresa
+    meta:
+      id: req_c780b9ef788243cab7d506735f97d3e1
+      created: 1766563335838
+      modified: 1766563369663
+      isPrivate: false
+      description: ""
+      sortKey: -1766563335838
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+          "correo": "karla@nebulagames.com",
+          "password": "karla123"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/empresa/videojuegos
+    name: lista de videojuegos de la empresa
+    meta:
+      id: req_b28b8bda290c47ec8e9ed5a812dd1fa7
+      created: 1766565202188
+      modified: 1766565236339
+      isPrivate: false
+      description: ""
+      sortKey: -1766565202188
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/empresa/videojuegos
+    name: publicacion de videojuegos de empresa
+    meta:
+      id: req_128bac3c913b4f098ad9f2431e830335
+      created: 1766612312335
+      modified: 1767080239162
+      isPrivate: false
+      description: ""
+      sortKey: -1766612312335
+    method: POST
+    body:
+      mimeType: application/json
+      text: |
+        {
+          "idClasificacion": 2,
+          "titulo": "Metal Slug 7",
+          "descripcion": "Ahora con más personajes y mejor jugabilidad.",
+          "precio": 599.99,
+          "requisitosMinimos": "8GB RAM, GTX 1050, i5",
+          "fechaLanzamiento": "2024-10-10",
+          "imagenPortada": "https://mis-imagenes.com/shooterx.jpg"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/empresa/videojuegos?id=9
+    name: editar videojuego
+    meta:
+      id: req_ba4a07ab9b314705a40fb211afe184f9
+      created: 1766614760405
+      modified: 1767080344241
+      isPrivate: false
+      description: ""
+      sortKey: -1766614760405
+    method: PUT
+    body:
+      mimeType: application/json
+      text: |
+        {
+          "idClasificacion": 2,
+          "titulo": "Metal Slug 7.1",
+          "descripcion": "Ahora con modo campaña",
+          "precio": 199.99,
+          "requisitosMinimos": "16GB RAM, RTX 2060, i7",
+          "fechaLanzamiento": "2025-12-30",
+          "imagenPortada": "https://mis-imagenes.com/shooterx2.jpg"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/empresa/videojuegos/venta
+    name: cambiar estado de venta del videojuego
+    meta:
+      id: req_e315ef830ed043eaad15d9bd03386465
+      created: 1766616700838
+      modified: 1767177607914
+      isPrivate: false
+      description: ""
+      sortKey: -1766616700838
+    method: PUT
+    body:
+      mimeType: application/json
+      text: |
+        {
+          "idVideojuego": 7,
+          "ventaActiva": "N"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_2c076d2d1698a9a4a9d9351429fb596406675653
+    created: 1766563310501
+    modified: 1767177468379
+  cookies:
+    - id: c0dca2dc-043f-4cb6-9ddb-57ab60d99277
+      key: JSESSIONID
+      value: 16458AEFACD3C44E335028A5EA5C8835
+      domain: localhost
+      path: /EpicStore-1.0-SNAPSHOT
+      secure: false
+      httpOnly: true
+      hostOnly: true
+environments:
+  name: Base Environment
+  meta:
+    id: env_2c076d2d1698a9a4a9d9351429fb596406675653
+    created: 1766563310490
+    modified: 1766563310490
+    isPrivate: false

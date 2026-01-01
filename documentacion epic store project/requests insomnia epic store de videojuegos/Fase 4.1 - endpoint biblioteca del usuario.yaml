@@ -1,0 +1,91 @@
+type: collection.insomnia.rest/5.0
+schema_version: "5.1"
+name: Fase 4.1 - endpoint biblioteca del usuario
+meta:
+  id: wrk_5e3edd6024b1424d9b035d0f0344fca2
+  created: 1766726893275
+  modified: 1766726893275
+  description: ""
+collection:
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/biblioteca?idUsuario=77
+    name: mostrar biblioteca de usuario
+    meta:
+      id: req_e99a4a24d104433ea0084e9f1bceda8b
+      created: 1766727308075
+      modified: 1766727336484
+      isPrivate: false
+      description: ""
+      sortKey: -1766727308075
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/biblioteca?idUsuario=88
+    name: mostramos biblioteca de usuario sin juegos
+    meta:
+      id: req_d1d196f5d99d4becb840d96e691c1895
+      created: 1766727351307
+      modified: 1766727387159
+      isPrivate: false
+      description: ""
+      sortKey: -1766727351307
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/biblioteca?idUsuario=9999
+    name: "tratamos de mostrar biblioteca de usuario inexistente "
+    meta:
+      id: req_11fff53db0344ca5a017ec13b7892656
+      created: 1766727444179
+      modified: 1766727455648
+      isPrivate: false
+      description: ""
+      sortKey: -1766727351407
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_4ccf0b1a872f802d50c1c7e7a310cf7540282c24
+    created: 1766726893283
+    modified: 1766726893283
+environments:
+  name: Base Environment
+  meta:
+    id: env_4ccf0b1a872f802d50c1c7e7a310cf7540282c24
+    created: 1766726893278
+    modified: 1766726893278
+    isPrivate: false

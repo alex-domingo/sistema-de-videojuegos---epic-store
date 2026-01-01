@@ -1,0 +1,277 @@
+type: collection.insomnia.rest/5.0
+schema_version: "5.1"
+name: fase 3 - endpoint cartera digital (saldo y recargas)
+meta:
+  id: wrk_657e6283e80d4c34b75bc3a2b4ce1bb1
+  created: 1766729179540
+  modified: 1766729179540
+  description: ""
+collection:
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/cartera/movimientos?idUsuario=91
+    name: mostramos usuario con movimientos
+    meta:
+      id: req_2c3828e8053d43dc97be43629cc0933b
+      created: 1766729503439
+      modified: 1766893125372
+      isPrivate: false
+      description: ""
+      sortKey: -1766729503439
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/cartera/movimientos?idUsuario=88
+    name: mostramos usuario sin movimientos
+    meta:
+      id: req_3e39cc0538da4f869d3f68072d5480c5
+      created: 1766729606169
+      modified: 1766729623666
+      isPrivate: false
+      description: ""
+      sortKey: -1766729503539
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/cartera/movimientos?idUsuario=999
+    name: intentamos movimientos de un usuario inexistente
+    meta:
+      id: req_e879ad573c614136aa675241f527e5fc
+      created: 1766730666389
+      modified: 1766730675037
+      isPrivate: false
+      description: ""
+      sortKey: -1766729503639
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/cartera/recarga
+    name: realizamos recarga exitosa
+    meta:
+      id: req_253652cd98d84b7e8694a1b9f44e528c
+      created: 1766731217594
+      modified: 1766898343764
+      isPrivate: false
+      description: ""
+      sortKey: -1766731217594
+    method: POST
+    body:
+      mimeType: application/json
+      text: |
+        {
+          "idUsuario": 96,
+          "monto": 15000,
+          "descripcion": "Recarga desde tarjeta"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/cartera/recarga
+    name: intentamos recargar con monto negativo o cero
+    meta:
+      id: req_6fd93c606c004178943aed1c5d360a76
+      created: 1766731400367
+      modified: 1766731435146
+      isPrivate: false
+      description: ""
+      sortKey: -1766731217694
+    method: POST
+    body:
+      mimeType: application/json
+      text: |
+        {
+          "idUsuario": 77,
+          "monto": -500,
+          "descripcion": "Recarga desde tarjeta"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/cartera/recarga
+    name: intentamos recargar a usuario inexistente
+    meta:
+      id: req_c8dcd8340c634e2da744742b774ebcab
+      created: 1766731460090
+      modified: 1766731476399
+      isPrivate: false
+      description: ""
+      sortKey: -1766731217794
+    method: POST
+    body:
+      mimeType: application/json
+      text: |
+        {
+          "idUsuario": 999,
+          "monto": 100,
+          "descripcion": "Recarga desde tarjeta"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/cartera/movimientos?idUsuario=77
+    name: verificamos recarga
+    meta:
+      id: req_b5bdf24c6f2d4dff818ff35aa09cfc0c
+      created: 1766731521121
+      modified: 1766731525531
+      isPrivate: false
+      description: ""
+      sortKey: -1766731217644
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/auth/login
+    name: login USUARIO COMUN
+    meta:
+      id: req_59b675bb43b34a65afc0d777146b8e65
+      created: 1766892872288
+      modified: 1766898332579
+      isPrivate: false
+      description: ""
+      sortKey: -1766729503339
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+          "login": "prueba6",
+          "password": "prueba123"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/auth/logout
+    name: logout
+    meta:
+      id: req_8073b5aac6a848b5bd19262263c1d5b7
+      created: 1766892984418
+      modified: 1766893011626
+      isPrivate: false
+      description: ""
+      sortKey: -1766729503389
+    method: POST
+    headers:
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_6d1c7cabf7e44b2bd218e7c04013f5f37b03d500
+    created: 1766729179562
+    modified: 1766898334617
+  cookies:
+    - id: 1c439eec-bd15-4d6d-becc-c9c6e447098c
+      key: JSESSIONID
+      value: 26AB9FE4E0B0007B46892DBAB30C8EA2
+      domain: localhost
+      path: /EpicStore-1.0-SNAPSHOT
+      secure: false
+      httpOnly: true
+      hostOnly: true
+environments:
+  name: Base Environment
+  meta:
+    id: env_6d1c7cabf7e44b2bd218e7c04013f5f37b03d500
+    created: 1766729179551
+    modified: 1766729179551
+    isPrivate: false

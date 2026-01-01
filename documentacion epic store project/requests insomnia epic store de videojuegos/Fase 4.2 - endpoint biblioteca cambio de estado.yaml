@@ -1,0 +1,155 @@
+type: collection.insomnia.rest/5.0
+schema_version: "5.1"
+name: Fase 4.2 - endpoint biblioteca cambio de estado
+meta:
+  id: wrk_352b4460143848169ce9720fc87f89b0
+  created: 1766728148337
+  modified: 1766728148337
+  description: ""
+collection:
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/biblioteca/estado
+    name: cambiar un videojuego propio a instalado (siempre permitido)
+    meta:
+      id: req_5f721dd1d3194614b2f31606678f707d
+      created: 1766728375720
+      modified: 1766729997654
+      isPrivate: false
+      description: ""
+      sortKey: -1766728375720
+    method: PUT
+    body:
+      mimeType: application/json
+      text: |
+        {
+          "idUsuario": 77,
+          "idVideojuego": 2,
+          "nuevoEstado": "INSTALADO"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/biblioteca/estado
+    name: instalar un prestado cuando no tiene otro prestado instalado
+    meta:
+      id: req_9b20ab16223442c1992032578f017039
+      created: 1766728630171
+      modified: 1766738147078
+      isPrivate: false
+      description: ""
+      sortKey: -1766728375820
+    method: PUT
+    body:
+      mimeType: application/json
+      text: |
+        {
+          "idUsuario": 88,
+          "idVideojuego": 2,
+          "nuevoEstado": "INSTALADO"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/biblioteca/estado
+    name: intentar instalar videojuego cuando no esta en biblioteca
+    meta:
+      id: req_4e2424a5a2e3452c86bf0e24ec259157
+      created: 1766728886619
+      modified: 1766729747716
+      isPrivate: false
+      description: ""
+      sortKey: -1766728375920
+    method: PUT
+    body:
+      mimeType: application/json
+      text: |
+        {
+          "idUsuario": 3,
+          "idVideojuego": 5,
+          "nuevoEstado": "INSTALADO"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/biblioteca/estado
+    name: intentar instalar otro videojuego prestado cuando ya tenemos otro
+      instalado prestado
+    meta:
+      id: req_93a8026a1da34838ab72e9003e5b8e8d
+      created: 1766738005239
+      modified: 1766738176517
+      isPrivate: false
+      description: ""
+      sortKey: -1766728375870
+    method: PUT
+    body:
+      mimeType: application/json
+      text: |
+        {
+          "idUsuario": 88,
+          "idVideojuego": 3,
+          "nuevoEstado": "INSTALADO"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_d0b7f453df6ad9e8f6bb87f2b9c8a4f6b3f5f11e
+    created: 1766728148358
+    modified: 1766728148358
+environments:
+  name: Base Environment
+  meta:
+    id: env_d0b7f453df6ad9e8f6bb87f2b9c8a4f6b3f5f11e
+    created: 1766728148348
+    modified: 1766728148348
+    isPrivate: false

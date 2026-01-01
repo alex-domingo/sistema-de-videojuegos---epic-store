@@ -1,0 +1,114 @@
+type: collection.insomnia.rest/5.0
+schema_version: "5.1"
+name: fase 6.3 - endpoint listar grupos y miembros
+meta:
+  id: wrk_cf2b16c5dbe64f0eabed18144c71cfe1
+  created: 1766737793767
+  modified: 1766741750266
+  description: ""
+collection:
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/grupos?idUsuario=77
+    name: ver los grupos de un usuario
+    meta:
+      id: req_67b095b3dbfd4c92a6528f70ffc230c6
+      created: 1766738420435
+      modified: 1766739246710
+      isPrivate: false
+      description: ""
+      sortKey: -1766738420435
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/grupos?idUsuario=99
+    name: intentamos ver usuario sin grupos o con id inexistente
+    meta:
+      id: req_a7d144a85deb4c5487df3a6f2de03484
+      created: 1766738523301
+      modified: 1766739248103
+      isPrivate: false
+      description: ""
+      sortKey: -1766738420535
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/grupos/miembros?idGrupo=2
+    name: listamos miembros del grupo
+    meta:
+      id: req_dc25648a889e4f7bbf565150400f95ac
+      created: 1766739066742
+      modified: 1766739249776
+      isPrivate: false
+      description: ""
+      sortKey: -1766739066742
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/grupos/miembros?idGrupo=999
+    name: tratamos de listar grupo inexistente
+    meta:
+      id: req_d4ebfd0b47134e129415d6f78c2ded1e
+      created: 1766739133757
+      modified: 1766739250650
+      isPrivate: false
+      description: ""
+      sortKey: -1766739066842
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_308584c41220b15de5dfe16246f1a49e63a67001
+    created: 1766737793801
+    modified: 1766737793801
+environments:
+  name: Base Environment
+  meta:
+    id: env_308584c41220b15de5dfe16246f1a49e63a67001
+    created: 1766737793778
+    modified: 1766737793778
+    isPrivate: false

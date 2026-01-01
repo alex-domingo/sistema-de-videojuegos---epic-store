@@ -1,0 +1,401 @@
+type: collection.insomnia.rest/5.0
+schema_version: "5.1"
+name: fase 2.2 - authfilter
+meta:
+  id: wrk_322c7c167c5949dcbe6765da1d5ee9a8
+  created: 1766875606216
+  modified: 1766875606216
+  description: ""
+collection:
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/categorias
+    name: podemos mostrar categorias (publico)
+    meta:
+      id: req_f65f28783bd94b2aa74d6323fb9381a7
+      created: 1766875629873
+      modified: 1766875701000
+      isPrivate: false
+      description: ""
+      sortKey: -1766875629873
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/videojuegos
+    name: podemos mostrar videojuegos (publico)
+    meta:
+      id: req_ec9ead3e035a4a7e9c35389beb8862c1
+      created: 1766875713204
+      modified: 1766875755371
+      isPrivate: false
+      description: ""
+      sortKey: -1766875713204
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/comentarios?idVideojuego=1
+    name: podemos mostrar comentarios de un videojuegos (publico)
+    meta:
+      id: req_69359084d92e465cbab4c9f6f07d4f17
+      created: 1766875803026
+      modified: 1766875823542
+      isPrivate: false
+      description: ""
+      sortKey: -1766875713304
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/compras
+    name: tratamos de realizar compra (necesita login)
+    meta:
+      id: req_d36ffe099223436aa0790b1550b269a3
+      created: 1766875865136
+      modified: 1766875919222
+      isPrivate: false
+      description: ""
+      sortKey: -1766875865136
+    method: POST
+    body:
+      mimeType: application/json
+      text: ""
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/biblioteca?idUsuario=77
+    name: tratamos de mostrar biblioteca de un usuario (necesita login)
+    meta:
+      id: req_a2130d2b4b4d47fabc66ba5cc342c442
+      created: 1766876006427
+      modified: 1766876669680
+      isPrivate: false
+      description: ""
+      sortKey: -1766875865236
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/auth/login
+    name: login de usuario COMUN Y ADMIN
+    meta:
+      id: req_c1d9e406ac6741a596df9c078da86536
+      created: 1766876155422
+      modified: 1766876216388
+      isPrivate: false
+      description: ""
+      sortKey: -1766876155422
+    method: POST
+    body:
+      mimeType: application/json
+      text: |
+        {
+          "login": "ludvin",
+          "password": "ludvin123"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/compras
+    name: con login correcto realizamos compra exitosa
+    meta:
+      id: req_4c4a60caf5ff4debb3ad98867f82c968
+      created: 1766876231898
+      modified: 1766876418826
+      isPrivate: false
+      description: ""
+      sortKey: -1766876231898
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+          "idUsuario": 77,
+          "idVideojuego": 6,
+          "fechaCompra": "2025-12-18"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/biblioteca?idUsuario=77
+    name: tratamos de mostrar biblioteca de un usuario (ya logueados)
+    meta:
+      id: req_541f1afeb5a34020a0ea23ca2bfbff5a
+      created: 1766876541331
+      modified: 1766876553860
+      isPrivate: false
+      description: ""
+      sortKey: -1766876231998
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/auth/logout
+    name: logout
+    meta:
+      id: req_7ea09082bcb84c64ae7be65bbd772a67
+      created: 1766876568895
+      modified: 1766876650025
+      isPrivate: false
+      description: ""
+      sortKey: -1766876568895
+    method: POST
+    headers:
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/auth/login-empresa
+    name: iniciamos con login-empresa
+    meta:
+      id: req_4566ef7dbbfb4a78ac648cfe17933889
+      created: 1766876697243
+      modified: 1766876823655
+      isPrivate: false
+      description: ""
+      sortKey: -1766876697243
+    method: POST
+    body:
+      mimeType: application/json
+      text: |
+        {
+          "correo": "karla@nebulagames.com",
+          "password": "karla123"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/empresa/videojuegos
+    name: tratamos de publicar un videojuego (necesita login de empresa)
+    meta:
+      id: req_16eb28b7a0264dc1bb40e07f3e13fd7b
+      created: 1766876864891
+      modified: 1766877061061
+      isPrivate: false
+      description: ""
+      sortKey: -1766876633069
+    method: POST
+    body:
+      mimeType: application/json
+      text: |
+        {
+          "idClasificacion": 2,
+          "titulo": "Epic Shooter XX",
+          "descripcion": "FPS competitivo con ranking ahora con BR.",
+          "precio": 500,
+          "requisitosMinimos": "8GB RAM, GTX 1050, i5",
+          "fechaLanzamiento": "2025-12-27",
+          "imagenPortada": "https://mis-imagenes.com/shooterxx.jpg"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/empresa/videojuegos
+    name: publicamos un videojuego (ya con login de empresa)
+    meta:
+      id: req_a7746550d6bd409787fc20a3a35959ac
+      created: 1766877143180
+      modified: 1766877146516
+      isPrivate: false
+      description: ""
+      sortKey: -1766876697343
+    method: POST
+    body:
+      mimeType: application/json
+      text: |
+        {
+          "idClasificacion": 2,
+          "titulo": "Epic Shooter XX",
+          "descripcion": "FPS competitivo con ranking ahora con BR.",
+          "precio": 500,
+          "requisitosMinimos": "8GB RAM, GTX 1050, i5",
+          "fechaLanzamiento": "2025-12-27",
+          "imagenPortada": "https://mis-imagenes.com/shooterxx.jpg"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/compras
+    name: tratamos de realizar compra (con login de empresa)
+    meta:
+      id: req_8771aa8e0c5c492ab55990635815c65f
+      created: 1766877209524
+      modified: 1766877303856
+      isPrivate: false
+      description: ""
+      sortKey: -1766876697443
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+          "idUsuario": 77,
+          "idVideojuego": 8,
+          "fechaCompra": "2025-12-18"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_c7a0bea05c7c557594a2d52bf4f9c503f074575d
+    created: 1766875606254
+    modified: 1766877089524
+  cookies:
+    - id: 8130d855-e2ec-4b54-ae31-2c0b8ec3b897
+      key: JSESSIONID
+      value: CAE1FC7318BEF0CD18C253C8D6B21D3F
+      domain: localhost
+      path: /EpicStore-1.0-SNAPSHOT
+      secure: false
+      httpOnly: true
+      hostOnly: true
+environments:
+  name: Base Environment
+  meta:
+    id: env_c7a0bea05c7c557594a2d52bf4f9c503f074575d
+    created: 1766875606249
+    modified: 1766875606249
+    isPrivate: false

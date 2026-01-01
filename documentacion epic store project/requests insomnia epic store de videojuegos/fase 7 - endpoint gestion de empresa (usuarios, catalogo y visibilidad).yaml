@@ -1,0 +1,324 @@
+type: collection.insomnia.rest/5.0
+schema_version: "5.1"
+name: fase 7 - endpoint gestion de empresa (usuarios, catalogo y visibilidad)
+meta:
+  id: wrk_3ae5005df36049fb86a657e9ddc4bec1
+  created: 1766557808552
+  modified: 1766882448549
+  description: ""
+collection:
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/auth/login-empresa
+    name: login usuario empresa
+    meta:
+      id: req_6d7b7f156a0e41e78aa9b4268c4ff779
+      created: 1766557820226
+      modified: 1766882248625
+      isPrivate: false
+      description: ""
+      sortKey: -1766557820226
+    method: POST
+    body:
+      mimeType: application/json
+      text: |
+        {
+          "correo": "luis@nebulagames.com",
+          "password": "luis123"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/auth/me
+    name: verificamos sesion activa
+    meta:
+      id: req_554674a5fafa40d38fd6c16be86af0d1
+      created: 1766558413197
+      modified: 1766558845221
+      isPrivate: false
+      description: ""
+      sortKey: -1766558413197
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/empresa/usuarios
+    name: listamos usuarios de la empresa
+    meta:
+      id: req_539b95cc1a444c27803f623ccb8afb5a
+      created: 1766558496190
+      modified: 1766558850698
+      isPrivate: false
+      description: ""
+      sortKey: -1766558496190
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/empresa/usuarios
+    name: creamos un nuevo usuario empresa
+    meta:
+      id: req_448c286eeafe40dfb6666ad2b32e5df3
+      created: 1766558607465
+      modified: 1766881966432
+      isPrivate: false
+      description: ""
+      sortKey: -1766558607465
+    method: POST
+    body:
+      mimeType: application/json
+      text: |
+        {
+          "nombre": "Soporte Epic",
+          "correo": "soporte@empresa.com",
+          "fechaNacimiento": "2000-01-10",
+          "password": "1234"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/empresa/usuarios
+    name: validacion correo duplicado
+    meta:
+      id: req_d9aab50953e94b3eae86db6cd0492559
+      created: 1766558766031
+      modified: 1766881938475
+      isPrivate: false
+      description: ""
+      sortKey: -1766558607565
+    method: POST
+    body:
+      mimeType: application/json
+      text: |
+        {
+          "nombre": "Desarrollo Epic",
+          "correo": "Desarrollo@empresa.com",
+          "fechaNacimiento": "2000-07-09",
+          "password": "1234"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/empresa/usuarios?id=6
+    name: eliminar usuario empresa
+    meta:
+      id: req_6e2e8185c11f4b13bd25277db1f53c59
+      created: 1766558862488
+      modified: 1766559207570
+      isPrivate: false
+      description: ""
+      sortKey: -1766558862488
+    method: DELETE
+    headers:
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/empresa/usuarios?id=3
+    name: validacion no eliminar ultimo usuario empresa
+    meta:
+      id: req_462ebbcc8d4a447e867d90c7b0e22b22
+      created: 1766559029037
+      modified: 1766882199416
+      isPrivate: false
+      description: ""
+      sortKey: -1766558862588
+    method: DELETE
+    headers:
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/auth/logout
+    name: logout usuario empresa
+    meta:
+      id: req_7c72ed079c5b4b2c9eaa76fb91735a9f
+      created: 1766559099047
+      modified: 1766559130876
+      isPrivate: false
+      description: ""
+      sortKey: -1766558116711.5
+    method: POST
+    headers:
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/empresa/usuarios?id=1
+    name: eliminar usuario empresa sin login
+    meta:
+      id: req_bad579a05e2b44d7bcdd2676c5cda074
+      created: 1766559298661
+      modified: 1766559310783
+      isPrivate: false
+      description: ""
+      sortKey: -1766558862688
+    method: DELETE
+    headers:
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/empresa/usuarios
+    name: listamos usuarios de la empresa con sesion de usuario comun
+    meta:
+      id: req_9960f60d9f4f4411b903c98c47a6f222
+      created: 1766559355087
+      modified: 1766559359042
+      isPrivate: false
+      description: ""
+      sortKey: -1766558862788
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/auth/login
+    name: login usuario comun
+    meta:
+      id: req_ae3eec16c0de48d28c12aa0f2fb0bbec
+      created: 1766559390949
+      modified: 1766559553646
+      isPrivate: false
+      description: ""
+      sortKey: -1766558862738
+    method: POST
+    body:
+      mimeType: application/json
+      text: |
+        {
+          "login": "alex",
+          "password": "alex123"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_952fe4ffe87bbe73673e5d3d9109599613bbd165
+    created: 1766557808574
+    modified: 1766882293571
+  cookies:
+    - id: fa400104-894e-4a24-a5e6-b37ffabf6cd2
+      key: JSESSIONID
+      value: A451E5AA875B9893100F58D3D977B208
+      domain: localhost
+      path: /EpicStore-1.0-SNAPSHOT
+      secure: false
+      httpOnly: true
+      hostOnly: true
+environments:
+  name: Base Environment
+  meta:
+    id: env_952fe4ffe87bbe73673e5d3d9109599613bbd165
+    created: 1766557808563
+    modified: 1766557808563
+    isPrivate: false

@@ -1,0 +1,296 @@
+type: collection.insomnia.rest/5.0
+schema_version: "5.1"
+name: fase 6.4 - endpoint devolver prestamos de videojuegos y eliminar miembros
+meta:
+  id: wrk_eeb970845ddd45399c5a2203741de0e1
+  created: 1766769013736
+  modified: 1766769013736
+  description: ""
+collection:
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/prestamos/devolver
+    name: devolver prestamo de videojuego en grupo familiar
+    meta:
+      id: req_eb77264f5ab040fbafe45d986873ee1f
+      created: 1766739821571
+      modified: 1767261840948
+      isPrivate: false
+      description: ""
+      sortKey: -1766739821571
+    method: POST
+    body:
+      mimeType: application/json
+      text: |
+        {
+          "idGrupo": 2,
+          "idDueno": 77,
+          "idReceptor": 88,
+          "idVideojuego": 2
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/biblioteca?idUsuario=88
+    name: verificamos que ya no aparezca en biblioteca
+    meta:
+      id: req_65f5796d9cde4b63b0f9ee61ec436007
+      created: 1766739951294
+      modified: 1766740009756
+      isPrivate: false
+      description: ""
+      sortKey: -1766739951294
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/grupos/miembros?idGrupo=2
+    name: verificamos que sigue igual (no toca miembros)
+    meta:
+      id: req_f7534d8d98d54cfca79f846ae275fe82
+      created: 1766740045105
+      modified: 1766740063168
+      isPrivate: false
+      description: ""
+      sortKey: -1766739951394
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/grupos/miembros
+    name: eliminar miembro correctamente
+    meta:
+      id: req_0ea240c6debc4bbd90fd58c9a1603fc4
+      created: 1766740728541
+      modified: 1767262070140
+      isPrivate: false
+      description: ""
+      sortKey: -1766740728541
+    method: DELETE
+    body:
+      mimeType: application/json
+      text: |
+        {
+          "idGrupo": 1,
+          "idDueno": 2,
+          "idUsuarioEliminar": 3
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/grupos/miembros?idGrupo=2
+    name: verificamos eliminacion de miembro
+    meta:
+      id: req_08e9db5290fa465f847352c41cb4a3cc
+      created: 1766740897174
+      modified: 1766740925374
+      isPrivate: false
+      description: ""
+      sortKey: -1766740728641
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/grupos/miembros
+    name: tratar de eliminar dueño del grupo familiar
+    meta:
+      id: req_73ae7326f36f400ea286df5a61130b7c
+      created: 1766741076162
+      modified: 1766741087085
+      isPrivate: false
+      description: ""
+      sortKey: -1766740728741
+    method: DELETE
+    body:
+      mimeType: application/json
+      text: |
+        {
+          "idGrupo": 2,
+          "idDueno": 77,
+          "idUsuarioEliminar": 77
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/grupos
+    name: eliminar grupo familiar
+    meta:
+      id: req_698542c64e224942ac3e6ba460f4e1ad
+      created: 1766741225545
+      modified: 1767262197358
+      isPrivate: false
+      description: ""
+      sortKey: -1766741225545
+    method: DELETE
+    body:
+      mimeType: application/json
+      text: |-
+        {
+          "idGrupo": 4,
+          "idDueno": 88
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/grupos
+    name: tratar de eliminar grupo familiar sin ser dueño
+    meta:
+      id: req_6e54c5a6e82641ebb4afed745e87cdf3
+      created: 1766741331249
+      modified: 1766741373152
+      isPrivate: false
+      description: ""
+      sortKey: -1766741331249
+    method: DELETE
+    body:
+      mimeType: application/json
+      text: |-
+        {
+          "idGrupo": 2,
+          "idDueno": 3
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/auth/login
+    name: login USUARIO COMUN
+    meta:
+      id: req_f1bb69466c6a4551bf7c56f6a899c3aa
+      created: 1767261603975
+      modified: 1767261651082
+      isPrivate: false
+      description: ""
+      sortKey: -1766739821471
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+          "login": "prueba6",
+          "password": "prueba123"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_fbe04cc2f654450ca22055ca5bc56bd9
+    created: 1766739734444
+    modified: 1767261652177
+  cookies:
+    - id: 5c3dafe4-057f-4378-b629-f1e4ced1c571
+      key: JSESSIONID
+      value: 0B6766AFFE19E0F7AB3ADBE2DCDA0592
+      domain: localhost
+      path: /EpicStore-1.0-SNAPSHOT
+      secure: false
+      httpOnly: true
+      hostOnly: true
+environments:
+  name: Base Environment
+  meta:
+    id: env_3fabbcf2576a40aaa2b743362f2e4787
+    created: 1766739734441
+    modified: 1766739734441
+    isPrivate: false

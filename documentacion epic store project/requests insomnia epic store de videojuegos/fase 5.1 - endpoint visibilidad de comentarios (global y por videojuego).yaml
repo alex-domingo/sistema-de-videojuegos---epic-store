@@ -1,0 +1,121 @@
+type: collection.insomnia.rest/5.0
+schema_version: "5.1"
+name: fase 5.1 - endpoint visibilidad de comentarios (global y por videojuego)
+meta:
+  id: wrk_e342ddfebf974cf989f41ce27aa2e317
+  created: 1766618652837
+  modified: 1766888721354
+  description: ""
+collection:
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/empresa/comentarios/global
+    name: comentarios visibles global
+    meta:
+      id: req_5d13619384044ba68c14b65160e95d13
+      created: 1766619202167
+      modified: 1766889247851
+      isPrivate: false
+      description: ""
+      sortKey: -1766619202167
+    method: PUT
+    body:
+      mimeType: application/json
+      text: |
+        { "comentariosVisiblesGlobal": "S" }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/auth/login-empresa
+    name: login usuario empresa
+    meta:
+      id: req_070ef60249d143d98362f493c1915680
+      created: 1766619320224
+      modified: 1766619410770
+      isPrivate: false
+      description: ""
+      sortKey: -1766619202067
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+          "correo": "karla@nebulagames.com",
+          "password": "karla123"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/empresa/videojuegos/comentarios
+    name: comentarios visibles por juego
+    meta:
+      id: req_66276c5e73a2454f83c0b0393711a8d9
+      created: 1766619569857
+      modified: 1766889318870
+      isPrivate: false
+      description: ""
+      sortKey: -1766619202267
+    method: PUT
+    body:
+      mimeType: application/json
+      text: |
+        { "idVideojuego": 1, "comentariosVisibles": "S" }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_9da3b7e18e31f040fd219e6e907cbeacfc6864c4
+    created: 1766618652859
+    modified: 1766889197218
+  cookies:
+    - id: a57a7f9b-27c5-4c71-86ce-c0785cbe84cd
+      key: JSESSIONID
+      value: 8F7B22940B7E100636EB0A1ED2BB8919
+      domain: localhost
+      path: /EpicStore-1.0-SNAPSHOT
+      secure: false
+      httpOnly: true
+      hostOnly: true
+environments:
+  name: Base Environment
+  meta:
+    id: env_9da3b7e18e31f040fd219e6e907cbeacfc6864c4
+    created: 1766618652848
+    modified: 1766618652848
+    isPrivate: false

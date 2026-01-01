@@ -1,0 +1,261 @@
+type: collection.insomnia.rest/5.0
+schema_version: "5.1"
+name: fase 6.1 - endpoint agregar miembros al grupo
+meta:
+  id: wrk_38050281953944789ca6a6e72b6c6dbc
+  created: 1766735400200
+  modified: 1766741719323
+  description: ""
+collection:
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/grupos/miembros
+    name: agregar miembro correctamente
+    meta:
+      id: req_b82b0f4b05b44f4ab43a2c449f7aefdc
+      created: 1766735432843
+      modified: 1767222339990
+      isPrivate: false
+      description: ""
+      sortKey: -1766735432843
+    method: POST
+    body:
+      mimeType: application/json
+      text: |
+        {
+          "idGrupo": 5,
+          "idDueno": 96,
+          "idUsuarioNuevo": 88
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/grupos/miembros
+    name: tratar de agregar miembro a un grupo que no existe
+    meta:
+      id: req_26f10b54c859492dbc72f06cf923c2e0
+      created: 1766735623915
+      modified: 1766735717637
+      isPrivate: false
+      description: ""
+      sortKey: -1766735432943
+    method: POST
+    body:
+      mimeType: application/json
+      text: |
+        {
+          "idGrupo": 77,
+          "idDueno": 77,
+          "idUsuarioNuevo": 3
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/grupos/miembros
+    name: tratar de agregar miembro a un grupo con un usuario que no es dueño
+    meta:
+      id: req_a887c831192b4e1aa0fdf889a920ef77
+      created: 1766735689688
+      modified: 1766735709565
+      isPrivate: false
+      description: ""
+      sortKey: -1766735433043
+    method: POST
+    body:
+      mimeType: application/json
+      text: |
+        {
+          "idGrupo": 2,
+          "idDueno": 4,
+          "idUsuarioNuevo": 3
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/grupos/miembros
+    name: tratar de volver a agregar al mismo miembro al mismo grupo
+    meta:
+      id: req_64520a3035ad49bcbbcd3576cb605c43
+      created: 1766735793559
+      modified: 1766737674404
+      isPrivate: false
+      description: ""
+      sortKey: -1766735433068
+    method: POST
+    body:
+      mimeType: application/json
+      text: |
+        {
+          "idGrupo": 2,
+          "idDueno": 77,
+          "idUsuarioNuevo": 88
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/grupos/miembros
+    name: validamos un grupo máximo de 6 miembros
+    meta:
+      id: req_b1896b92da3b4bc993d80c23cbff3a33
+      created: 1766735848958
+      modified: 1766737701219
+      isPrivate: false
+      description: ""
+      sortKey: -1766735433093
+    method: POST
+    body:
+      mimeType: application/json
+      text: |
+        {
+          "idGrupo": 2,
+          "idDueno": 77,
+          "idUsuarioNuevo": 6
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/grupos/miembros
+    name: tratar de agregar miembro a un grupo con un usuario que no existe
+    meta:
+      id: req_b99940da1f014736b9b904e94a38bea6
+      created: 1766737608296
+      modified: 1766737640870
+      isPrivate: false
+      description: ""
+      sortKey: -1766735432993
+    method: POST
+    body:
+      mimeType: application/json
+      text: |
+        {
+          "idGrupo": 2,
+          "idDueno": 77,
+          "idUsuarioNuevo": 99
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/auth/login
+    name: login USUARIO COMUN
+    meta:
+      id: req_65a4d0335ca64b11a61cffb4e0be8d46
+      created: 1767222157108
+      modified: 1767222208134
+      isPrivate: false
+      description: ""
+      sortKey: -1766735432743
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+          "login": "prueba6",
+          "password": "prueba123"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_df0092787cc21c85acb9f893f32788a488de436b
+    created: 1766735400221
+    modified: 1767222209964
+  cookies:
+    - id: 27c86f50-b02b-4942-bc45-fbea0cfde23d
+      key: JSESSIONID
+      value: AA34EE4300009014AB47D486C3C54D43
+      domain: localhost
+      path: /EpicStore-1.0-SNAPSHOT
+      secure: false
+      httpOnly: true
+      hostOnly: true
+environments:
+  name: Base Environment
+  meta:
+    id: env_df0092787cc21c85acb9f893f32788a488de436b
+    created: 1766735400211
+    modified: 1766735400211
+    isPrivate: false

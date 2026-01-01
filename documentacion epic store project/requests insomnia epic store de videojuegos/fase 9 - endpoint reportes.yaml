@@ -1,0 +1,394 @@
+type: collection.insomnia.rest/5.0
+schema_version: "5.1"
+name: fase 9 - endpoint reportes
+meta:
+  id: wrk_be36cdb12b9d485b9b1225f2eec13ed0
+  created: 1766891183794
+  modified: 1766891183794
+  description: ""
+collection:
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/auth/login
+    name: login - usuario comun
+    meta:
+      id: req_1b635e9fbe394f3aa9719fa1ee7fc895
+      created: 1766893690313
+      modified: 1766911756913
+      isPrivate: false
+      description: ""
+      sortKey: -1766893721869.5
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+          "login": "prueba6",
+          "password": "prueba123"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/auth/logout
+    name: logout
+    meta:
+      id: req_9053e176812b4d5da3c95e57a753a49c
+      created: 1766893753526
+      modified: 1766894745175
+      isPrivate: false
+      description: ""
+      sortKey: -1766893690113
+    method: POST
+    headers:
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/reportes/historial-gastos?desde=2025-12-18&hasta=2025-12-20
+    name: historial de gastos desde - hasta (USUARIO COMUN)
+    meta:
+      id: req_63a2809cadc5451ab2162a774c8d5361
+      created: 1766893787235
+      modified: 1766893987877
+      isPrivate: false
+      description: ""
+      sortKey: -1766893787235
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/reportes/historial-gastos
+    name: historial de gastos sin intervalos (USUARIO COMUN)
+    meta:
+      id: req_4721cab145dc4952aecc66432dc9017f
+      created: 1766893951025
+      modified: 1766894069603
+      isPrivate: false
+      description: ""
+      sortKey: -1766893951025
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/auth/login-empresa
+    name: login - empresa
+    meta:
+      id: req_c9826491e2cf4fb5a338b1402913ecf3
+      created: 1766894225459
+      modified: 1766894481706
+      isPrivate: false
+      description: ""
+      sortKey: -1766893690213
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+          "correo": "luis@nebulagames.com",
+          "password": "luis123"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/empresa/reportes/ventas-propias?desde=2025-12-18&hasta=2025-12-21
+    name: reporte de ventas propias desde - hasta (EMPRESAS)
+    meta:
+      id: req_0f073c3c9ab8402a80209cb71d578354
+      created: 1766894473211
+      modified: 1766894734279
+      isPrivate: false
+      description: ""
+      sortKey: -1766893706041.25
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/empresa/reportes/ventas-propias
+    name: reporte de ventas sin intervalos (EMPRESAS)
+    meta:
+      id: req_5ddd5c3aa9d24e33b4b45946ed92ff94
+      created: 1766894719897
+      modified: 1766894758858
+      isPrivate: false
+      description: ""
+      sortKey: -1766893713955.375
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/empresa/reportes/feedback/calificaciones
+    name: calificacion promedio por juego (EMPRESAS)
+    meta:
+      id: req_fe2a87c48fbe4c7d9a90a922e6d321c9
+      created: 1766897028301
+      modified: 1766899382075
+      isPrivate: false
+      description: ""
+      sortKey: -1766893717912.4375
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/empresa/reportes/feedback/mejores-comentarios?limit=10
+    name: mejores comentarios mas respuestas (EMPRESAS)
+    meta:
+      id: req_2daae5208f554cfe82c49d4b9618fecb
+      created: 1766897129747
+      modified: 1766899493823
+      isPrivate: false
+      description: ""
+      sortKey: -1766893719890.9688
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/empresa/reportes/feedback/peores-calificaciones?limit=10
+    name: peores calificaciones (EMPRESAS)
+    meta:
+      id: req_acdafb3c57654be59bb2dfe36aea45df
+      created: 1766897234411
+      modified: 1766899546276
+      isPrivate: false
+      description: ""
+      sortKey: -1766893720880.2344
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/reportes/analisis-biblioteca/valoraciones
+    name: valoracion personal vs comunidad (USUARIO COMUN)
+    meta:
+      id: req_67f6d8d8b45d49b996e12921931a1593
+      created: 1766903269457
+      modified: 1766903369317
+      isPrivate: false
+      description: ""
+      sortKey: -1766903269457
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/reportes/analisis-biblioteca/categorias-favoritas?limit=10
+    name: categoria favorita (USUARIO COMUN)
+    meta:
+      id: req_ed048a9c4e674ed5a2e997573b5987e3
+      created: 1766903495947
+      modified: 1766903515197
+      isPrivate: false
+      description: ""
+      sortKey: -1766903269557
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/reportes/biblioteca-familiar/uso
+    name: uso de biblioteca - prestamos (USUARIO COMUN)
+    meta:
+      id: req_7b3f8dbed3ab468099c65ef7b2d9d66c
+      created: 1766905750397
+      modified: 1766905853213
+      isPrivate: false
+      description: ""
+      sortKey: -1766903269657
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/empresa/reportes/top5-juegos
+    name: top 5 juegos (EMPRESAS)
+    meta:
+      id: req_29988dd5e92a4440baebfc13a2c26231
+      created: 1766907302911
+      modified: 1766907314145
+      isPrivate: false
+      description: ""
+      sortKey: -1766893721374.8672
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/EpicStore-1.0-SNAPSHOT/api/empresa/reportes/top5-juegos?desde=2025-12-18&hasta=2025-12-20
+    name: top 5 juegos desde - hasta (EMPRESAS)
+    meta:
+      id: req_ba2f0dd3c8dd479fa944bf6f5b155548
+      created: 1766907345265
+      modified: 1766907410283
+      isPrivate: false
+      description: ""
+      sortKey: -1766893721622.1836
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_e9e2c37fe9b18a7e01a3183023caeaeabf7258ad
+    created: 1766891183830
+    modified: 1766911760719
+  cookies:
+    - id: 3f814e94-4263-4d95-bccf-e88251afb9b3
+      key: JSESSIONID
+      value: 4B2A38B2B8649D25A2F36A9FDCE03A36
+      domain: localhost
+      path: /EpicStore-1.0-SNAPSHOT
+      secure: false
+      httpOnly: true
+      hostOnly: true
+environments:
+  name: Base Environment
+  meta:
+    id: env_e9e2c37fe9b18a7e01a3183023caeaeabf7258ad
+    created: 1766891183826
+    modified: 1766891183826
+    isPrivate: false
