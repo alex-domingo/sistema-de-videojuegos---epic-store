@@ -38,3 +38,30 @@
         Nota: el backend valida dueño, límite 6, duplicado, etc.
     </p>
 </section>
+
+<section class="card">
+    <h3>Prestar videojuego</h3>
+
+    <ng-container *ngIf="esDueno(); else noDueno">
+        <div class="row">
+            <input type="number" placeholder="ID receptor (miembro)" [ngModel]="idReceptor()"
+                (ngModelChange)="idReceptor.set($event); errorPrestamo.set(null)" />
+            <input type="number" placeholder="ID videojuego" [ngModel]="idVideojuego()"
+                (ngModelChange)="idVideojuego.set($event); errorPrestamo.set(null)" />
+            <button (click)="prestar()" [disabled]="prestando()">
+                {{ prestando() ? 'Prestando...' : 'Prestar' }}
+            </button>
+        </div>
+
+        <p class="ok" *ngIf="okPrestamo()">{{ okPrestamo() }}</p>
+        <p class="error" *ngIf="errorPrestamo()">{{ errorPrestamo() }}</p>
+
+        <p class="muted">
+            El backend valida: receptor miembro, dueño válido y que el receptor no tenga ya el juego.
+        </p>
+    </ng-container>
+
+    <ng-template #noDueno>
+        <p class="muted">Solo el dueño del grupo puede prestar videojuegos.</p>
+    </ng-template>
+</section>
