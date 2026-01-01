@@ -81,4 +81,77 @@
     </section>
 
     <p class="hint" *ngIf="resp()">{{ resp()!.mensaje }}</p>
+
+    <!-- Sección de comentarios -->
+    <section class="card" *ngIf="juego()">
+        <h3>Comentarios</h3>
+
+        <p *ngIf="cargandoComentarios()">Cargando comentarios...</p>
+        <p class="error" *ngIf="errorComentarios()">{{ errorComentarios() }}</p>
+        <p class="ok" *ngIf="okComentario()">{{ okComentario() }}</p>
+
+        <!-- Formulario de comentarios -->
+        <div *ngIf="sessionState.esUsuario(); else guest" class="form">
+            <p class="muted" *ngIf="respondiendoA()">
+                Respondiendo a comentario #{{ respondiendoA() }}
+                <button class="btn-link" (click)="respondiendoA.set(null)">Cancelar</button>
+            </p>
+
+            <label>
+                Calificación:
+                <select [value]="calificacion()" (change)="calificacion.set(+($any($event.target)).value)">
+                    <option [value]="5">5</option>
+                    <option [value]="4">4</option>
+                    <option [value]="3">3</option>
+                    <option [value]="2">2</option>
+                    <option [value]="1">1</option>
+                </select>
+            </label>
+
+            <textarea rows="3" placeholder="Escribe tu comentario..." [value]="textoComentario()"
+                (input)="textoComentario.set(($any($event.target)).value)"></textarea>
+
+            <button (click)="enviarComentario()" [disabled]="enviandoComentario()">
+                {{ enviandoComentario() ? 'Enviando...' : (respondiendoA() ? 'Responder' : 'Comentar') }}
+            </button>
+        </div>
+
+        <ng-template #guest>
+            <p class="muted">Inicia sesión como usuario para comentar.</p>
+        </ng-template>
+
+        <!-- Lista con hilos de comentarios -->
+        <div *ngIf="!cargandoComentarios() && comentarios().length === 0">
+            <p class="muted">No hay comentarios aún. ¡Sé el primero en comentar!</p>
+        </div>
+
+        <div class="thread" *ngFor="let c of comentarios()">
+            <div class="comment">
+                <div class="head">
+                    <b>{{ c.nickname }}</b>
+                    <span class="muted">#{{ c.idComentario }}</span>
+                    <span class="badge">{{ c.calificacion }}/5</span>
+                </div>
+                <p>{{ c.texto }}</p>
+                <button class="btn-link" *ngIf="sessionState.esUsuario()" (click)="comenzarRespuesta(c.idComentario)">
+                    Responder
+                </button>
+            </div>
+
+            <div class="replies" *ngIf="c.respuestas.length">
+                <div class="comment reply" *ngFor="let r of c.respuestas">
+                    <div class="head">
+                        <b>{{ r.nickname }}</b>
+                        <span class="muted">#{{ r.idComentario }}</span>
+                        <span class="badge">{{ r.calificacion }}/5</span>
+                    </div>
+                    <p>{{ r.texto }}</p>
+                    <button class="btn-link" *ngIf="sessionState.esUsuario()"
+                        (click)="comenzarRespuesta(c.idComentario)">
+                        Responder al hilo
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
 </div>
