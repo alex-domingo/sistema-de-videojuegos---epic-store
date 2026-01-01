@@ -115,3 +115,35 @@
 .muted {
     opacity: .75;
 }
+
+.head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    /* Espacio entre elementos */
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+    /* Para que se ajuste en pantallas pequeñas */
+}
+
+.head b {
+    font-weight: 600;
+}
+
+.head .muted {
+    color: #666;
+    font-size: 0.9em;
+}
+
+.head .badge {
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 2px 8px;
+    font-size: 0.85em;
+    font-weight: 500;
+}
+
+.head>*:not(:last-child) {
+    margin-right: 8px;
+}
