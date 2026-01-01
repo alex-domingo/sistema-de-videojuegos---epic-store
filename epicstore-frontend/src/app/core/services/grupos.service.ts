@@ -6,8 +6,10 @@ import {
     CrearGrupoResponse,
     AgregarMiembroRequest,
     RespuestaSimple,
-    ListaMiembrosResponse
+    ListaMiembrosResponse,
 } from '../models/grupos.model';
+
+import { EliminarMiembroRequest, EliminarGrupoRequest } from '../models/grupos-eliminar.model';
 
 @Injectable({ providedIn: 'root' })
 export class GruposService {
@@ -28,4 +30,13 @@ export class GruposService {
     agregarMiembro(body: AgregarMiembroRequest) {
         return this.api.post<RespuestaSimple>('/grupos/miembros', body);
     }
+
+    eliminarMiembro(body: EliminarMiembroRequest) {
+        return this.api.deleteWithBody<RespuestaSimple>('/grupos/miembros', body);
+    }
+
+    eliminarGrupo(body: EliminarGrupoRequest) {
+        return this.api.deleteWithBody<RespuestaSimple>('/grupos', body);
+    }
+
 }
