@@ -2,7 +2,7 @@ import { Component, inject, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { EmpresasService } from '../../core/services/empresas.service';
-import { EmpresaPerfilResponse } from '../../core/models/empresa-catalogo.model';
+import { EmpresaPerfilResponse } from '../../core/models/empresa-perfil.model';
 
 @Component({
   selector: 'app-empresa-perfil',

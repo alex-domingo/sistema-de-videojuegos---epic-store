@@ -1,13 +1,33 @@
-export interface EmpresaCatalogoItem {
+export type SN = 'S' | 'N';
+
+export interface EmpresaVideojuegoItem {
     idVideojuego: number;
+    idEmpresa: number;
+    idClasificacion: number;
     titulo: string;
+    descripcion: string;
     precio: number;
-    ventaActiva: 'S' | 'N';
-    calificacionPromedio?: number; // a veces viene, a veces no
+    requisitosMinimos: string;
+    fechaLanzamiento: string; // YYYY-MM-DD
+    imagenPortada: string;
+
+    ventaActiva: SN;
+    comentariosVisibles: SN;
+
+    codigoClasificacion: string; // "T", "M", etc.
+    edadMinima: number;
+
+    calificacionPromedio?: number; // a veces viene
+    totalVentas: number;
 }
 
-export interface EmpresaPerfilResponse {
+export interface EmpresaCatalogoResponse {
+    datos: EmpresaVideojuegoItem[];
     exito: boolean;
-    empresa: import('./empresa.model').EmpresaPublica;
-    catalogo: EmpresaCatalogoItem[];
+    mensaje: string;
+}
+
+export interface ApiMsg {
+    exito: boolean;
+    mensaje: string;
 }
