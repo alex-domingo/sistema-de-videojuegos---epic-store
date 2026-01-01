@@ -51,6 +51,33 @@
             <p class="mono">{{ v.imagenPortada }}</p>
             <!-- aquí vamos a poder cambiar a <img> si la ruta es absoluta o mapeable -->
         </div>
+
+        <!-- Nueva sección de compra -->
+        <div class="section">
+            <h3>Comprar</h3>
+
+            <ng-container *ngIf="sessionState.esUsuario(); else noUser">
+                <label class="label">
+                    Fecha de compra:
+                    <input type="date" [value]="fechaCompra()"
+                        (change)="fechaCompra.set(($any($event.target)).value)" />
+                </label>
+
+                <button class="btn" (click)="comprar()" [disabled]="comprando()">
+                    {{ comprando() ? 'Comprando...' : 'Comprar ahora' }}
+                </button>
+
+                <p class="ok" *ngIf="okCompra()">{{ okCompra() }}</p>
+                <a class="btn-link" *ngIf="okCompra()" routerLink="/biblioteca">Ver en mi biblioteca</a>
+                <p class="error" *ngIf="errorCompra()">{{ errorCompra() }}</p>
+            </ng-container>
+
+            <ng-template #noUser>
+                <p class="muted">
+                    Inicia sesión como usuario para comprar.
+                </p>
+            </ng-template>
+        </div>
     </section>
 
     <p class="hint" *ngIf="resp()">{{ resp()!.mensaje }}</p>
