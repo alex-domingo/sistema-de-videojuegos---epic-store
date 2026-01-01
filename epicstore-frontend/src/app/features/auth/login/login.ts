@@ -1,6 +1,6 @@
 import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router, RouterModule } from '@angular/router';
+import { Router, RouterModule, ActivatedRoute } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../../core/services/auth.service';
 import { SessionState } from '../../../core/state/session.state';
@@ -15,11 +15,18 @@ export class Login {
   private auth = inject(AuthService);
   private state = inject(SessionState);
   private router = inject(Router);
+  private route = inject(ActivatedRoute);
 
   login = signal('');
   password = signal('');
   error = signal<string | null>(null);
   loading = signal(false);
+  registroOk = signal(false);
+
+  constructor() {
+    const ok = this.route.snapshot.queryParamMap.get('registro') === 'ok';
+    this.registroOk.set(ok);
+  }
 
   submit() {
     this.error.set(null);

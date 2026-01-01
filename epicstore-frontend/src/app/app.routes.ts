@@ -10,6 +10,7 @@ import { empresaGuard } from './core/guards/empresa.guard';
 import { adminGuard } from './core/guards/admin.guard';
 import { Biblioteca } from './features/biblioteca/biblioteca';
 import { Cartera } from './features/cartera/cartera';
+import { Registro } from './features/auth/registro/registro';
 
 export const routes: Routes = [
     // públicas
@@ -24,6 +25,7 @@ export const routes: Routes = [
     // ejemplo:
     { path: 'biblioteca', component: Biblioteca, canActivate: [usuarioGuard] },
     { path: 'cartera', component: Cartera, canActivate: [usuarioGuard] },
+    { path: 'registro', component: Registro },
     // { path: 'empresa/dashboard', component: EmpresaDashboard, canActivate: [empresaGuard] },
     // { path: 'admin', component: AdminHome, canActivate: [adminGuard] },
 
