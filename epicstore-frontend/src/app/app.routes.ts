@@ -9,7 +9,7 @@ import { usuarioGuard } from './core/guards/usuario.guard';
 import { empresaGuard } from './core/guards/empresa.guard';
 import { adminGuard } from './core/guards/admin.guard';
 import { Biblioteca } from './features/biblioteca/biblioteca';
-
+import { Cartera } from './features/cartera/cartera';
 
 export const routes: Routes = [
     // públicas
@@ -23,6 +23,7 @@ export const routes: Routes = [
     // protegidas (placeholder por ahora)
     // ejemplo:
     { path: 'biblioteca', component: Biblioteca, canActivate: [usuarioGuard] },
+    { path: 'cartera', component: Cartera, canActivate: [usuarioGuard] },
     // { path: 'empresa/dashboard', component: EmpresaDashboard, canActivate: [empresaGuard] },
     // { path: 'admin', component: AdminHome, canActivate: [adminGuard] },
 

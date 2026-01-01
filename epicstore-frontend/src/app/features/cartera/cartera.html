@@ -1,0 +1,59 @@
+<div class="page">
+    <header class="header">
+        <h2>Cartera</h2>
+        <a routerLink="/" class="back">← Volver</a>
+    </header>
+
+    <p *ngIf="cargando()">Cargando...</p>
+    <p class="error" *ngIf="error()">{{ error() }}</p>
+    <p class="ok" *ngIf="ok()">{{ ok() }}</p>
+
+    <section class="card">
+        <div class="saldo">
+            <div class="label">Saldo actual</div>
+            <div class="value">Q{{ saldoActual() }}</div>
+        </div>
+
+        <h3>Recargar</h3>
+        <div class="form">
+            <label>Monto</label>
+            <input type="number" [ngModel]="monto()" (ngModelChange)="monto.set($event)" />
+
+            <label>Descripción</label>
+            <input [ngModel]="descripcion()" (ngModelChange)="descripcion.set($event)" />
+
+            <button class="btn" (click)="recargar()" [disabled]="recargando()">
+                {{ recargando() ? 'Recargando...' : 'Recargar' }}
+            </button>
+        </div>
+    </section>
+
+    <section class="card">
+        <h3>Movimientos ({{ totalMovimientos() }})</h3>
+
+        <table class="table" *ngIf="movimientos().length; else empty">
+            <thead>
+                <tr>
+                    <th>Fecha</th>
+                    <th>Tipo</th>
+                    <th>Monto</th>
+                    <th>Saldo</th>
+                    <th>Descripción</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let m of movimientos()">
+                    <td>{{ m.fecha }}</td>
+                    <td>{{ m.tipo }}</td>
+                    <td>Q{{ m.monto }}</td>
+                    <td>Q{{ m.saldoResultante }}</td>
+                    <td>{{ m.descripcion }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <ng-template #empty>
+            <p class="muted">No hay movimientos.</p>
+        </ng-template>
+    </section>
+</div>
