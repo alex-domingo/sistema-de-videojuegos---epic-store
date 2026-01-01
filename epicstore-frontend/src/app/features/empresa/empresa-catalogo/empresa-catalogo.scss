@@ -1,0 +1,58 @@
+.muted {
+    opacity: .75;
+}
+
+.ok {
+    color: #7CFC98;
+    opacity: .9;
+}
+
+.error {
+    color: #ff6b6b;
+}
+
+.list {
+    display: grid;
+    gap: 12px;
+}
+
+.card {
+    border: 1px solid #333;
+    border-radius: 14px;
+    padding: 14px;
+}
+
+.top {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    align-items: flex-start;
+}
+
+.title {
+    font-weight: 900;
+    font-size: 18px;
+}
+
+button {
+    padding: 8px 10px;
+    cursor: pointer;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.badge {
+    border: 1px solid #444;
+    padding: 2px 8px;
+    border-radius: 999px;
+}
+
+.desc {
+    margin-top: 10px;
+    opacity: .9;
+}

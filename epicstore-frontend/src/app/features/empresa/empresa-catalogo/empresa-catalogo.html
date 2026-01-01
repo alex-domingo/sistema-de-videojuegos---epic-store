@@ -1,1 +1,31 @@
-<p>empresa-catalogo works!</p>
+<h2>Catálogo de la empresa</h2>
+
+<p *ngIf="cargando()" class="muted">Cargando...</p>
+<p *ngIf="ok()" class="ok">{{ ok() }}</p>
+<p *ngIf="error()" class="error">{{ error() }}</p>
+
+<div class="list" *ngIf="!cargando()">
+    <div class="card" *ngFor="let v of items()">
+        <div class="top">
+            <div>
+                <div class="title">{{ v.titulo }}</div>
+                <div class="muted">ID: {{ v.idVideojuego }} · {{ v.codigoClasificacion }} ({{ v.edadMinima }}+)</div>
+            </div>
+
+            <button (click)="toggleVenta(v)" [disabled]="togglingId() === v.idVideojuego">
+                {{ v.ventaActiva === 'S' ? 'Desactivar venta' : 'Activar venta' }}
+            </button>
+        </div>
+
+        <div class="grid">
+            <div><b>Precio:</b> Q{{ v.precio }}</div>
+            <div><b>Ventas:</b> {{ v.totalVentas }}</div>
+            <div><b>Calificación:</b> {{ v.calificacionPromedio ?? 0 }}</div>
+            <div><b>Venta:</b> <span class="badge">{{ v.ventaActiva }}</span></div>
+            <div><b>Comentarios:</b> <span class="badge">{{ v.comentariosVisibles }}</span></div>
+            <div><b>Lanzamiento:</b> {{ v.fechaLanzamiento }}</div>
+        </div>
+
+        <p class="desc">{{ v.descripcion }}</p>
+    </div>
+</div>

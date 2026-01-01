@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
-import { EmpresaPerfilResponse } from '../models/empresa-catalogo.model';
+import { EmpresaPerfilResponse } from '../models/empresa-perfil.model';
 
 @Injectable({ providedIn: 'root' })
 export class EmpresasService {
