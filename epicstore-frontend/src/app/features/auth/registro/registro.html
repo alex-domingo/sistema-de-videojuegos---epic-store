@@ -1,0 +1,71 @@
+<h2>Registro de usuario</h2>
+
+<form (ngSubmit)="registrar()">
+    <div class="grid">
+        <label>
+            Nickname
+            <input [ngModel]="nickname()" (ngModelChange)="nickname.set($event); error.set(null)" name="nickname" />
+        </label>
+
+        <label>
+            Correo
+            <input [ngModel]="correo()" (ngModelChange)="correo.set($event); error.set(null)" name="correo" />
+        </label>
+
+        <label>
+            Password
+            <input type="password" [ngModel]="password()" (ngModelChange)="password.set($event); error.set(null)"
+                name="password" />
+        </label>
+
+        <label>
+            Confirmar password
+            <input type="password" [ngModel]="password2()" (ngModelChange)="password2.set($event); error.set(null)"
+                name="password2" />
+        </label>
+
+        <!-- Mensaje de validación de contraseñas -->
+        <p class="warn" *ngIf="password() && password2() && !passwordsIguales()">
+            Las contraseñas no coinciden
+        </p>
+
+        <label>
+            Fecha de nacimiento
+            <input type="date" [ngModel]="fechaNacimiento()"
+                (ngModelChange)="fechaNacimiento.set($event); error.set(null)" name="fechaNacimiento" />
+        </label>
+
+        <label>
+            Teléfono
+            <input [ngModel]="telefono()" (ngModelChange)="telefono.set($event); error.set(null)" name="telefono" />
+        </label>
+
+        <label>
+            País
+            <input [ngModel]="pais()" (ngModelChange)="pais.set($event); error.set(null)" name="pais" />
+        </label>
+
+        <label>
+            Avatar (string)
+            <input [ngModel]="avatar()" (ngModelChange)="avatar.set($event); error.set(null)" name="avatar" />
+        </label>
+
+        <label class="check">
+            <input type="checkbox" [ngModel]="bibliotecaPublica()" (ngModelChange)="bibliotecaPublica.set($event)"
+                name="bibliotecaPublica" />
+            Biblioteca pública
+        </label>
+    </div>
+
+    <p class="error" *ngIf="error()">{{ error() }}</p>
+    <p class="ok" *ngIf="ok()">{{ ok() }}</p>
+
+    <!-- Botón con validación mejorada -->
+    <button type="submit" [disabled]="loading() || !puedeEnviar()">
+        {{ loading() ? 'Registrando...' : 'Registrarme' }}
+    </button>
+</form>
+
+<p style="margin-top:12px;">
+    ¿Ya tienes cuenta? <a routerLink="/login">Ir a login</a>
+</p>

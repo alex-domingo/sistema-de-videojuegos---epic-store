@@ -1,0 +1,39 @@
+.grid {
+    display: grid;
+    gap: 10px;
+    max-width: 520px;
+    font-family: Arial, sans-serif;
+}
+
+input {
+    padding: 8px;
+    border-radius: 10px;
+    border: 1px solid #444;
+}
+
+.check {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.error {
+    color: #ff6b6b;
+}
+
+.ok {
+    color: #7CFC98;
+    opacity: .9;
+}
+
+button {
+    margin-top: 10px;
+    padding: 8px 10px;
+    cursor: pointer;
+}
+
+.warn {
+    color: #ffd36a;
+    opacity: .95;
+    margin: 0;
+}
